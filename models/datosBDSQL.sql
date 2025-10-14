@@ -1,21 +1,21 @@
 
 
 -- Insert de datos de las localidades
-INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('alava', '01000');
+INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Álava', '01000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Albacete', '02000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Alicante', '03000');
-INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Almeria', '04000');
-INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('avila', '05000');
+INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Almería', '04000');
+INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Ávila', '05000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Badajoz', '06000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Baleares', '07000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Barcelona', '08000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Burgos', '09000');
-INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Caceres', '10000');
-INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Cadiz', '11000');
-INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Castellon', '12000');
+INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Cáceres', '10000');
+INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Cádiz', '11000');
+INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Castellón', '12000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Ceuta', '51000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Ciudad Real', '13000');
-INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Cordoba', '14000');
+INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Córdoba', '14000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('La Coruña', '15000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('La Rioja', '26000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Cuenca', '16000');
@@ -25,12 +25,12 @@ INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Guadalajara', '19000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Gipuzkoa', '20000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Huelva', '21000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Huesca', '22000');
-INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Jaen', '23000');
-INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Leon', '24000');
-INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Lerida', '25000');
+INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Jaén', '23000');
+INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('León', '24000');
+INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Lérida', '25000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Lugo', '27000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Madrid', '28000');
-INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Malaga', '29000');
+INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Málaga', '29000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Melilla', '52000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Murcia', '30000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Navarra', '31000');

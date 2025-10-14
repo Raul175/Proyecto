@@ -270,6 +270,8 @@
                     success: function(response) {
                         if (response == 1) {
                             window.location.href = "/Proyecto/admin";
+                        } else if (response == 2) {
+                            window.location.href = "/Proyecto/gerente";
                         } else if (response == 0) {
                             window.location.href = "/Proyecto/";
                         } else {

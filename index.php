@@ -107,6 +107,57 @@
         }
     });
 
+    //Rutas a las views del gerente
+    $router->get("/gerente", function(){ 
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 2){
+            include "gerente/gerente.php";unset($_SESSION['habitaciones']); 
+        }else{
+            header("Location: /Proyecto");
+        }
+    });
+    $router->get("/gerente/habitaciones", function(){ 
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 2){
+            include "gerente/habitaciones.php";unset($_SESSION['habitaciones']); 
+        }else{
+            header("Location: /Proyecto");
+        }
+    });
+    $router->get("/gerente/hoteles", function(){ 
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 2){
+            include "gerente/hoteles.php";unset($_SESSION['habitaciones']);
+        }else{
+            header("Location: /Proyecto");
+        } 
+    });
+    $router->get("/gerente/aplicarCodProm", function(){
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 2){
+            include "gerente/aplicarCodProm.php";unset($_SESSION['habitaciones']);
+        }else{
+            header("Location: /Proyecto");
+        }
+    });
+    $router->get("/gerente/aplicarCama", function(){ 
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 2){
+            include "gerente/aplicarCama.php";unset($_SESSION['habitaciones']); 
+        }else{
+            header("Location: /Proyecto");
+        }
+    });
+    $router->get("/gerente/aplicarComplemento", function(){ 
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 2){
+            include "gerente/aplicarComplemento.php";unset($_SESSION['habitaciones']); 
+        }else{
+            header("Location: /Proyecto");
+        }
+    });
+    $router->get("/gerente/facturas", function(){ 
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 2){
+            include "gerente/facturas.php";unset($_SESSION['habitaciones']); 
+        }else{
+            header("Location: /Proyecto");
+        }
+    });
+
     //Controladores
     $router->match("GET|POST", "/userController", function(){ require_once("controllers/users_controller.php"); });
     $router->match("GET|POST", "/dbController", function(){ require_once("controllers/db_controller.php"); });

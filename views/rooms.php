@@ -194,7 +194,7 @@
                     </div>
                     <div class="p-4 mt-2">
                         <div class="d-flex justify-content-between mb-3">
-                            <h5 class="mb-0"><?= $habitacion['Nombre'] ?><?= empty($habitacion['Tipo']) ? "" : " - ". $habitacion['Tipo'] ?></h5>
+                            <h5 class="mb-0"><?= $habitacion['Nombre'] ?></h5>
                             <div class="ps-2">
                                 <?php for($i = 0; $i < $habitacion['NEstrellas']; $i++): ?>
                                     <small class="fas fa-star text-primary"></small>
@@ -479,6 +479,8 @@
                     success: function(response) {
                         if (response == 1) {
                             window.location.href = "/Proyecto/admin";
+                        } else if (response == 2) {
+                            window.location.href = "/Proyecto/gerente";
                         } else if (response == 0) {
                             window.location.href = "/Proyecto/";
                         } else {

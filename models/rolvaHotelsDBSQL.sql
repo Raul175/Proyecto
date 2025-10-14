@@ -27,7 +27,7 @@ CREATE TABLE Usuario (
     Sexo VARCHAR(50),
     Domicilio VARCHAR(50),
     FNacimiento DATE,
-    Admin ENUM('0','1') DEFAULT '0'
+    Admin ENUM('0','1','2') DEFAULT '0'
 );
 
 -- Tabla Factura
@@ -97,9 +97,9 @@ CREATE TABLE Reserva (
     complemento VARCHAR(50),
     Estado VARCHAR(50),
     Incidencia VARCHAR(500),
-    FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario),
-    FOREIGN KEY (IdHabitacion) REFERENCES Habitacion(IdHabitacion),
-    FOREIGN KEY (IdFactura) REFERENCES Factura(IdFactura)
+    FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (IdHabitacion) REFERENCES Habitacion(IdHabitacion) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (IdFactura) REFERENCES Factura(IdFactura) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Tabla Cama
