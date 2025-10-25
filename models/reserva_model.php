@@ -124,6 +124,33 @@ class Reserva {
         }
     }
 
+    public static function selectAllReservasGerente($id){
+        try {
+            $stmt = DataBase::connect()->prepare("
+                SELECT 
+                r.IdReserva AS Reserva,
+                h.Nombre AS Habitacion,
+                u.Nombre AS Usuario,
+                u.Correo AS Correo,
+                r.FInicio AS FEntrada,
+                r.FFin AS FSalida, 
+                r.Estado AS Estado,
+                f.Precio AS Precio,
+                r.Incidencia AS Incidencia
+                FROM Reserva r
+                JOIN Factura f ON r.IdFactura = f.IdFactura
+                JOIN Usuario u ON r.IdUsuario = u.IdUsuario
+                JOIN Habitacion h ON r.IdHabitacion = h.IdHabitacion
+                JOIN Hotel ho ON u.IdUsuario = ho.FK_IdUsuario
+                WHERE ho.FK_IdUsuario LIKE ?
+            ");
+            $stmt->execute([$id]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return "Error al realizar la consulta: " . $e->getMessage();
+        }
+    }
+
     public static function pagar($habitacion,$usuario,$factura, $reserva){
         try {
             if($reserva != null){

@@ -139,6 +139,10 @@
         return Reserva::selectAllReservas();
     }
 
+    function selectAllReservasGerente($id){
+        return Reserva::selectAllReservasGerente($id);
+    }
+
     function selectReservasUserId($id){
         return Reserva::selectReservasUserId($id);
     }

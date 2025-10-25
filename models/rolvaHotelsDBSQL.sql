@@ -7,15 +7,6 @@ CREATE TABLE Localidad (
     CodigoPostal VARCHAR(20)
 );
 
--- Tabla Hotel
-CREATE TABLE Hotel (
-    IdHotel INT AUTO_INCREMENT PRIMARY KEY,
-    Nombre VARCHAR(100),
-    Ubicacion VARCHAR(100),
-    FK_IdLocalidad INT,
-    FOREIGN KEY (FK_IdLocalidad) REFERENCES Localidad(IdLocalidad) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 -- Tabla Usuario
 CREATE TABLE Usuario (
     IdUsuario INT AUTO_INCREMENT PRIMARY KEY,
@@ -28,6 +19,17 @@ CREATE TABLE Usuario (
     Domicilio VARCHAR(50),
     FNacimiento DATE,
     Admin ENUM('0','1','2') DEFAULT '0'
+);
+
+-- Tabla Hotel
+CREATE TABLE Hotel (
+    IdHotel INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(100),
+    Ubicacion VARCHAR(100),
+    FK_IdLocalidad INT,
+    FK_IdUsuario INT,
+    FOREIGN KEY (FK_IdLocalidad) REFERENCES Localidad(IdLocalidad) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (FK_IdUsuario) REFERENCES Usuario(IdUsuario) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- Tabla Factura

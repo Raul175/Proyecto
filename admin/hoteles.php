@@ -1,6 +1,8 @@
 <?php
     require_once('controllers/hotel_controller.php');
     require_once('controllers/localidad_controller.php');
+    require_once('controllers/users_controller.php');
+    
     $hoteles = selectAllHotels();
     if (empty($hoteles)) {
         $hoteles = [];
@@ -8,6 +10,10 @@
     $localidades = selectAllLocalidades();
     if (empty($localidades)) {
         $localidades = [];
+    }
+    $gerentes = selectAllUsersGerente();
+    if (empty($usuarios)) {
+        $usuarios = [];
     }
     
 ?>
@@ -272,7 +278,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="localidad">Localidad</label>
+                    <label for="localidad">Localidad</label>
                         <select class="form-control" id="localidad1" name="localidad1">
                             <option value="">Seleccione una opción</option>
                             <?php foreach ($localidades as $localidad): ?>
@@ -281,6 +287,19 @@
                         </select>
                         <div class="invalid-feedback" style="display: none;" id="localidad-error1">
                             La localidad no tiene que estar vacia.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <!-- Mirar más tarde -->
+                    <label for="localidad">Gerentes</label>
+                        <select class="form-control" id="gerente" name="gerente">
+                            <option value="">Seleccione una opción</option>
+                            <?php foreach ($gerentes as $gerente): ?>
+                                <option value="<?= $gerente['IdUsuario'] ?>"><?= $gerente['Nombre'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <div class="invalid-feedback" style="display: none;" id="usuario-error1">
+                            El usuario no tiene que estar vacia.
                         </div>
                     </div>
                 </div>
@@ -317,6 +336,7 @@
             const nombre =  $(this).find("#nombre1").val();
             const ubicacion = $(this).find("#ubicacion1").val();
             const localidad =  $(this).find("#localidad1").val();
+            const gerente =  $(this).find("#gerente").val();
 
             const nombrePattern = /^[a-zA-Z0-9\s]{1,100}$/;
             if (!nombrePattern.test(nombre)) {
@@ -351,6 +371,7 @@
                         nombre : nombre,
                         ubicacion : ubicacion,
                         localidad : localidad,
+                        usuario : gerente,
                         insertar : 1
                     },
                     success: function(response) {

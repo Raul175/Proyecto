@@ -8,7 +8,7 @@
         if(!empty($hotel) && $hotel[0]['Nombre'] == $_POST['nombre']){
             echo "Ya existe este hotel";
         }else{
-            createHotel($_POST['nombre'], $_POST['localidad'], $_POST['ubicacion']);
+            createHotel($_POST['nombre'], $_POST['localidad'], $_POST['ubicacion'], $_POST['usuario']);
         }
     }
     if(isset($_POST['actualizar'])){
@@ -66,6 +66,16 @@
         return $hoteles;
     }
 
+    function selectAllHotelsGerente($id){
+        $hotels = Hotel::selectAllHotelsGerente($id);
+        if (is_array($hotels)) {
+            foreach ($hotels as &$hotel) {
+                $hotel['FK_IdLocalidad'] = Localidad::selectLocalidad($hotel['FK_IdLocalidad']);
+            }
+            return $hotels;
+        }
+    }
+
     function selectAllHotelsLocal(){
         $hoteles = [];
         $datos = Hotel::selectAllHotelsLocal();
@@ -99,8 +109,8 @@
         return $hoteles;
     }
 
-    function createHotel($nombre , $fkIdLocalidad, $ubicacion){
-        echo Hotel::createHotel($nombre, $fkIdLocalidad, $ubicacion);
+    function createHotel($nombre , $fkIdLocalidad, $ubicacion, $usuario){
+        echo Hotel::createHotel($nombre, $fkIdLocalidad, $ubicacion, $usuario);
     }
 
     function deleteHotel($id){

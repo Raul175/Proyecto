@@ -1,6 +1,6 @@
 <?php
     require_once('controllers/reserva_controller.php');
-    $reservas = selectAllReservas();
+    $reservas = selectAllReservasGerente($_SESSION['id']);
     if (empty($reservas) || !is_array($reservas)) {
         $reservas = [];
     }

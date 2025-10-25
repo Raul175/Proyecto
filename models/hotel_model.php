@@ -10,10 +10,10 @@ class Hotel {
         $this->fkIdLocalidad = $fkIdLocalidad;
     }
 
-    public static function createHotel($nombre, $fkIdLocalidad, $ubicacion){
+    public static function createHotel($nombre, $fkIdLocalidad, $ubicacion, $usuario = null){
         try {
-            $stmt = DataBase::connect()->prepare("INSERT INTO Hotel (Nombre, FK_IdLocalidad, Ubicacion) VALUES (?, ?, ?)");
-            $stmt->execute([$nombre, $fkIdLocalidad, $ubicacion]);
+            $stmt = DataBase::connect()->prepare("INSERT INTO Hotel (Nombre, FK_IdLocalidad, Ubicacion, FK_IdUsuario) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$nombre, $fkIdLocalidad, $ubicacion, $usuario]);
             return true;
         } catch (PDOException $e) {
             return "Error al crear hotel: " . $e->getMessage();
@@ -69,6 +69,17 @@ class Hotel {
             //throw $th;
         }
         
+    }
+
+    public static function selectAllHotelsGerente($id){
+        try {
+            $stmt = DataBase::connect()->prepare("SELECT * FROM Hotel WHERE FK_IdUsuario LIKE ?");
+            $stmt->execute([$id]);
+            $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $hotels;
+        } catch (PDOException $e) {
+            return "Error al obtener los hoteles: " . $e->getMessage();
+        }
     }
 
     public static function selectAllHotelsLocal(){

@@ -84,6 +84,18 @@
         return $rooms;
     }
 
+    function selectAllRoomsGerente($id){
+        $rooms = Habitacion::selectAllRoomsGerente($id);
+        if ($rooms != false) {
+            foreach ($rooms as &$room) {
+                $room['hotel_ubi'] = Hotel::selectHotel($room['FK_IdHotel'])['Ubicacion'];
+                $room['FK_IdHotel'] = Hotel::selectHotel($room['FK_IdHotel'])['Nombre'];
+                $room['suite'] = Habitacion::selectSuite($room['IdHabitacion']);
+            }
+        }
+        return $rooms;
+    }
+
     function selectRoom($habitacion){
         $room = Habitacion::selectRoom($habitacion);
         return $room;
@@ -124,6 +136,17 @@
 
     function selectAllSuite(){
         $rooms = Habitacion::selectAllSuite();
+        if (empty($rooms)) {
+            $rooms = [];
+        }
+        foreach ($rooms as &$room) {
+            $room['FK_IdHotel'] = Hotel::selectHotel($room['FK_IdHotel'])['Nombre'];
+        }
+        return $rooms;
+    }
+
+    function selectAllSuiteGerente(){
+        $rooms = Habitacion::selectAllSuiteGerente($_SESSION['id']);
         if (empty($rooms)) {
             $rooms = [];
         }

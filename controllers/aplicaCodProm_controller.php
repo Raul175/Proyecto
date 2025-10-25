@@ -50,6 +50,32 @@
         return $codAplicados;
     }
 
+    function selectAllAplicaGerente(){
+        $habitaciones = selectAllRoomsGerente($_SESSION['id']);
+        if(empty($habitaciones)){
+            $habitaciones =  [];
+        }
+        $aplicados = Aplicar::selectAllAplica();
+        if(empty($aplicados)){
+            $aplicados = [];
+        }
+        $codAplicados = [];
+
+        foreach ($habitaciones as $habitacion) {
+            $codAplicados[$habitacion['IdHabitacion']] = [
+                'habitacion' => $habitacion,
+                'codigos' => []
+            ];
+            foreach ($aplicados as &$aplicado) {
+                if($habitacion['IdHabitacion'] == $aplicado['IdHabitacion']){
+                    $codAplicados[$habitacion['IdHabitacion']]['codigos'][] = $aplicado;
+                }
+            }
+        }
+
+        return $codAplicados;
+    }
+
     function aplicarCodProm($habitacion, $codigo, $inicio, $fin){
         echo Aplicar::aplicarCodProm($habitacion, $codigo, $inicio, $fin);
     }

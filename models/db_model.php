@@ -30,6 +30,7 @@ class DataBase{
                 ['Juan', 'Perez Garcia', 'juan.perez@gmail.com', 'pass123', '12345678A', '1985-05-12', 'hombre', 'Calle Falsa 123', 0],
                 ['Ana', 'Lopez Martin', 'ana.lopez@gmail.com', 'pass123', '87654321B', '1990-10-01', 'mujer', 'Av. Siempre Viva 742', 0],
                 ['Carlos', 'Sánchez Ruiz', 'carlos.sanchez@gmail.com', 'pass123', '11223344C', '1978-03-22', 'hombre', 'Paseo de la Reforma 10', 0],
+                ['pepe', 'pepito pepito', 'pepito123@gmail.com', 'pepito_1', '11222344C', '1971-03-22', 'hombre', 'Paseo de la Reforma 10', 2],
             ];
 
             $stmt = $connect->prepare("INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, FNacimiento, sexo, domicilio, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -45,7 +46,7 @@ class DataBase{
                     $user[5], // FNacimiento
                     $user[6], // sexo
                     $user[7], // domicilio
-                    $user[8]  // admin
+                    $user[8] // admin
                 ]);
             }
 

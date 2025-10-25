@@ -5,7 +5,7 @@
     if (empty($camas)) {
         $camas = [];
     }
-    $camasAplicadas = selectAllAplica();
+    $camasAplicadas = selectAllAplicaGerente();
     if (empty($camasAplicadas)) {
         $camasAplicadas = [];
     }

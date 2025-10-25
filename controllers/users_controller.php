@@ -52,6 +52,10 @@
         return users::selectUserId($id);
     }
 
+    function selectAllUsersGerente(){
+        return users::selectAllUsersGerente();
+    }
+
     function createUser($nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio, $nacimiento, $admin){
         echo users::createUser($nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio, $nacimiento, $admin);
     }

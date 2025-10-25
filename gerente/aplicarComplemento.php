@@ -5,7 +5,7 @@
     if (empty($complementos)) {
         $complementos = [];
     }
-    $comAplicados = selectAllAplica();
+    $comAplicados = selectAllAplicaGerente();
     if (empty($comAplicados)) {
         $comAplicados = [];
     }

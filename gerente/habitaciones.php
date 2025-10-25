@@ -1,11 +1,11 @@
 <?php
     require_once('controllers/room_controller.php');
     require_once('controllers/hotel_controller.php');
-    $habitaciones = selectAllRooms();
+    $habitaciones = selectAllRoomsGerente($_SESSION['id']);
     if (empty($habitaciones)) {
         $habitaciones = [];
     }
-    $hoteles = selectAllHotels();
+    $hoteles = selectAllHotelsGerente($_SESSION['id']);
     if (empty($hoteles)) {
         $hoteles = [];
     }

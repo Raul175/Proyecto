@@ -55,26 +55,16 @@ INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Zamora', '49000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Zaragoza', '50000');
 
 -- Insert de datos hoteles
-INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad) VALUES ('Hotel Mirador', 'Calle Mayor 12', 1); -- alava
-INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad) VALUES ('Gran Hotel Castilla', 'Avenida del Rey 45', 2); -- Albacete
-INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad) VALUES ('Hotel Sol y Mar', 'Paseo Maritimo 5', 3); -- Alicante
-INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad) VALUES ('Hotel Costa Azul', 'Plaza del Puerto 7', 7); -- Baleares
-INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad) VALUES ('Hotel Serrano', 'Calle Real 90', 14); -- Cordoba
-INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad) VALUES ('Hotel del Norte', 'Av. de la Montaña 3', 9); -- Burgos
-INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad) VALUES ('Hotel San Telmo', 'Camino del Sur 88', 38); -- Santa Cruz de Tenerife
-INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad) VALUES ('Hotel Central', 'Calle Alcala 100', 28); -- Madrid
-INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad) VALUES ('Hotel Guadalquivir', 'Paseo del Rio 33', 41); -- Sevilla
-INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad) VALUES ('Hotel Monteverde', 'Avenida del Bosque 20', 47); -- Valladolid
-
--- Insert de datos de los usuarios (2 administradores y 2 usuario)
--- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, FNacimiento, sexo, domicilio, admin) VALUES 
--- ('admin123', 'admin admin', 'admin@rolvahotels.com', SHA2('admin@3000', 256), '29292929W', '2004-02-05', 'hombre', 'Cº Majo 25', 1),
--- ('raul', 'gonzalez alvarez', 'raul@rolvahotels.com', SHA2('raul$123', 256), '29292921J', '2005-12-20', 'hombre', 'Cº Rio 21', 1),
--- ('Carlos', 'Gomez Perez', 'carlos.gomez@gmail.com', SHA2('carlos123', 256), '12345678A', '1990-05-10', 'hombre', 'Calle Mayor 12', 0),
--- ('Lucia', 'Martinez Ruiz', 'lucia.martinez@gmail.com', SHA2('lucia123', 256), '87654321B', '1995-08-15', 'mujer', 'Avda. Andalucia 34', 0),
--- ('Juan', 'Perez Garcia', 'juan.perez@gmail.com', SHA2('pass123', 256), '12345678A', '1985-05-12', 'hombre', 'Calle Falsa 123', 0),
--- ('Ana', 'Lopez Martin', 'ana.lopez@gmail.com', SHA2('pass123', 256), '87654321B', '1990-10-01', 'mujer', 'Av. Siempre Viva 742', 0),
--- ('Carlos', 'Sanchez Ruiz', 'carlos.sanchez@gmail.com', SHA2('pass123', 256), '11223344C', '1978-03-22', 'hombre', 'Paseo de la Reforma 10', 0);
+INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad, FK_IdUsuario) VALUES ('Hotel Mirador', 'Calle Mayor 12', 1, 3); -- alava
+INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad, FK_IdUsuario) VALUES ('Gran Hotel Castilla', 'Avenida del Rey 45', 2, 3); -- Albacete
+INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad, FK_IdUsuario) VALUES ('Hotel Sol y Mar', 'Paseo Maritimo 5', 3, 9); -- Alicante
+INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad, FK_IdUsuario) VALUES ('Hotel Costa Azul', 'Plaza del Puerto 7', 7, 3); -- Baleares
+INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad, FK_IdUsuario) VALUES ('Hotel Serrano', 'Calle Real 90', 14, 9); -- Cordoba
+INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad, FK_IdUsuario) VALUES ('Hotel del Norte', 'Av. de la Montaña 3', 9, 9); -- Burgos
+INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad, FK_IdUsuario) VALUES ('Hotel San Telmo', 'Camino del Sur 88', 38, 9); -- Santa Cruz de Tenerife
+INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad, FK_IdUsuario) VALUES ('Hotel Central', 'Calle Alcala 100', 28, 3); -- Madrid
+INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad, FK_IdUsuario) VALUES ('Hotel Guadalquivir', 'Paseo del Rio 33', 41, 3); -- Sevilla
+INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad, FK_IdUsuario) VALUES ('Hotel Monteverde', 'Avenida del Bosque 20', 47, 9); -- Valladolid
 
 -- Facturas
 INSERT INTO Factura (Nombre, Correo, Precio) 

@@ -42,6 +42,32 @@
         return $codAplicados;
     }
 
+    function selectAllAplicaGerente(){
+        $habitaciones = selectAllRoomsGerente($_SESSION['id']);
+        if(empty($habitaciones)){
+            $habitaciones =  [];
+        }
+        $aplicados = AplicarCama::selectAllAplica();
+        if(empty($aplicados)){
+            $aplicados = [];
+        }
+        $codAplicados = [];
+
+        foreach ($habitaciones as $habitacion) {
+            $codAplicados[$habitacion['IdHabitacion']] = [
+                'habitacion' => $habitacion,
+                'camas' => []
+            ];
+            foreach ($aplicados as $aplicado) {
+                if($habitacion['IdHabitacion'] == $aplicado['IdHabitacion']){
+                    $codAplicados[$habitacion['IdHabitacion']]['camas'][] = $aplicado;
+                }
+            }
+        }
+
+        return $codAplicados;
+    }
+
     function aplicarCama($habitacion, $cama){
         echo AplicarCama::aplicarCama($habitacion, $cama);
     }

@@ -5,7 +5,7 @@
     if (empty($codigos)) {
         $codigos = [];
     }
-    $codAplicados = selectAllAplica();
+    $codAplicados = selectAllAplicaGerente();
     if (empty($codAplicados)) {
         $codAplicados = [];
     }   

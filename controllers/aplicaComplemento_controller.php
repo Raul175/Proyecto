@@ -42,6 +42,32 @@
         return $codAplicados;
     }
 
+    function selectAllAplicaGerente(){
+        $habitaciones = selectAllSuiteGerente();
+        if(empty($habitaciones)){
+            $habitaciones =  [];
+        }
+        $aplicados = AplicarComplemento::selectAllAplica();
+        if(empty($aplicados)){
+            $aplicados = [];
+        }
+        $codAplicados = [];
+
+        foreach ($habitaciones as $habitacion) {
+            $codAplicados[$habitacion['IdHabitacion']] = [
+                'habitacion' => $habitacion,
+                'complementos' => []
+            ];
+            foreach ($aplicados as $aplicado) {
+                if($habitacion['IdHabitacion'] == $aplicado['IdHabitacion']){
+                    $codAplicados[$habitacion['IdHabitacion']]['complementos'][] = $aplicado;
+                }
+            }
+        }
+
+        return $codAplicados;
+    }
+
     function aplicarComplemento($habitacion, $complemento){
         echo AplicarComplemento::aplicarComplemento($habitacion, $complemento);
     }

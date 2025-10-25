@@ -1,7 +1,8 @@
 <?php
     require_once('controllers/hotel_controller.php');
     require_once('controllers/localidad_controller.php');
-    $hoteles = selectAllHotels();
+
+    $hoteles = selectAllHotelsGerente($_SESSION['id']);
     if (empty($hoteles)) {
         $hoteles = [];
     }
@@ -9,6 +10,7 @@
     if (empty($localidades)) {
         $localidades = [];
     }
+    
     
 ?>
 <!DOCTYPE html>
@@ -284,6 +286,7 @@
                         </div>
                     </div>
                 </div>
+                <input type="hidden" class="form-control" value="<?= $hotel['FK_IdUsuario'] ?>" name="usuario" id="usuario">
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" onclick="$('#insertForm')[0].reset(); $('[id$=\'-error1\']').hide();$('.is-invalid').removeClass('is-invalid');" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Insertar</button>
@@ -317,6 +320,7 @@
             const nombre =  $(this).find("#nombre1").val();
             const ubicacion = $(this).find("#ubicacion1").val();
             const localidad =  $(this).find("#localidad1").val();
+            const usuario =  $(this).find("#usuario").val();
 
             const nombrePattern = /^[a-zA-Z0-9\s]{1,100}$/;
             if (!nombrePattern.test(nombre)) {
@@ -351,6 +355,7 @@
                         nombre : nombre,
                         ubicacion : ubicacion,
                         localidad : localidad,
+                        usuario : usuario,
                         insertar : 1
                     },
                     success: function(response) {

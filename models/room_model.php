@@ -102,6 +102,21 @@ class Habitacion {
         }
     }
 
+    public static function selectAllRoomsGerente($id){
+        try {
+            $stmt = DataBase::connect()->prepare("
+            SELECT * FROM Habitacion h
+            JOIN Hotel ho ON h.FK_IdHotel = ho.IdHotel
+            WHERE ho.FK_IdUsuario LIKE ?
+            ");
+            $stmt->execute([$id]);
+            $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $rooms;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
     public static function selectRoom($habitacion){
         try {
             $stmt = DataBase::connect()->prepare("SELECT IdHabitacion,Nombre FROM Habitacion WHERE IdHabitacion = ?");
@@ -197,6 +212,21 @@ class Habitacion {
         try {
             $stmt = DataBase::connect()->prepare("SELECT * FROM Habitacion WHERE Tipo LIKE ?");
             $stmt->execute(["suite"]);
+            $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $rooms;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public static function selectAllSuiteGerente($id){
+        try {
+            $stmt = DataBase::connect()->prepare("
+            SELECT * FROM Habitacion 
+            JOIN Hotel ho ON h.FK_IdHotel = ho.IdHotel
+            WHERE Tipo LIKE ? AND ho.FK_IdUsuario LIKE ?
+            ");
+            $stmt->execute(["suite",$id]);
             $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $rooms;
         } catch (PDOException $e) {

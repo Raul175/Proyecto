@@ -66,6 +66,17 @@ abstract class users{
                 }
         }
 
+        public static function selectAllUsersGerente(){
+                try {
+                        $stmt = DataBase::connect()->prepare("SELECT * FROM Usuario WHERE admin LIKE 2");
+                        $stmt->execute();
+                        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        return $users;
+                } catch (PDOException $e) {
+                        return false;
+                }
+        }
+
         public static function deleteUser($id = 0){
                 try {
                         $stmt = DataBase::connect()->prepare("DELETE FROM Usuario WHERE idUsuario LIKE ?");
