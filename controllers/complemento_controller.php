@@ -22,6 +22,79 @@
         deleteComplemento($_POST['id']);
     }
 
+    if(isset($_POST['aplicar'])){
+        $aplicaciones = Complemento::checkAplicar($_POST['habitacion'], $_POST['complemento']);
+        if(!empty($aplicaciones) && $aplicaciones['IdComplemento'] == $_POST['complemento'] && $aplicaciones['IdHabitacion'] == $_POST['habitacion']){
+            echo "Ya existe esta aplicación";
+        }else{
+            aplicarComplemento($_POST['habitacion'], $_POST['complemento']);
+        }
+    }
+    if(isset($_POST['eliminar1'])){
+        deleteAplica($_POST['habitacion'], $_POST['complemento']);
+    }
+
+    function selectAllAplica(){
+        require_once('controllers/room_controller.php');
+        $habitaciones = selectAllSuite();
+        if(empty($habitaciones)){
+            $habitaciones =  [];
+        }
+        $aplicados = Complemento::selectAllAplica();
+        if(empty($aplicados)){
+            $aplicados = [];
+        }
+        $codAplicados = [];
+
+        foreach ($habitaciones as $habitacion) {
+            $codAplicados[$habitacion['IdHabitacion']] = [
+                'habitacion' => $habitacion,
+                'complementos' => []
+            ];
+            foreach ($aplicados as $aplicado) {
+                if($habitacion['IdHabitacion'] == $aplicado['IdHabitacion']){
+                    $codAplicados[$habitacion['IdHabitacion']]['complementos'][] = $aplicado;
+                }
+            }
+        }
+
+        return $codAplicados;
+    }
+
+    function selectAllAplicaGerente(){
+        $habitaciones = selectAllSuiteGerente();
+        if(empty($habitaciones)){
+            $habitaciones =  [];
+        }
+        $aplicados = Complemento::selectAllAplica();
+        if(empty($aplicados)){
+            $aplicados = [];
+        }
+        $codAplicados = [];
+
+        foreach ($habitaciones as $habitacion) {
+            $codAplicados[$habitacion['IdHabitacion']] = [
+                'habitacion' => $habitacion,
+                'complementos' => []
+            ];
+            foreach ($aplicados as $aplicado) {
+                if($habitacion['IdHabitacion'] == $aplicado['IdHabitacion']){
+                    $codAplicados[$habitacion['IdHabitacion']]['complementos'][] = $aplicado;
+                }
+            }
+        }
+
+        return $codAplicados;
+    }
+
+    function aplicarComplemento($habitacion, $complemento){
+        echo Complemento::aplicarComplemento($habitacion, $complemento);
+    }
+
+    function deleteAplica($habitacion, $complemento){
+        echo Complemento::deleteAplica($habitacion, $complemento);
+    }
+
     function selectAllComplemento(){
         return Complemento::selectAllComplemento();
     }

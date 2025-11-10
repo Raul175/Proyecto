@@ -2,10 +2,12 @@
 class CodigoPromocional {
     private $codigo;
     private $descuento;
+    private $habitacion;
 
-    public function __construct($codigo = "", $descuento = 0.0) {
+    public function __construct($codigo = "", $descuento = 0.0, $habitacion) {
         $this->codigo = $codigo;
         $this->descuento = $descuento;
+        $this->habitacion = $habitacion;
     }
 
     public static function createCodProm($codigo = "", $descuento = 0.0){
@@ -70,20 +72,57 @@ class CodigoPromocional {
         }
     }
 
-    public function getCodigo() {
-        return $this->codigo;
+    public static function aplicarCodProm($habitacion, $codigo, $inicio, $fin){
+        try {
+            $stmt = DataBase::connect()->prepare("INSERT INTO Aplica (IdHabitacion, IdCodigo, FInicio, FFin) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$habitacion, $codigo, $inicio, $fin]);
+            return true;
+        } catch (PDOException $e) {
+            return "Error al aplicar el código promocional: " . $e->getMessage();
+        }
     }
 
-    public function setCodigo($codigo) {
-        $this->codigo = $codigo;
+    public static function updateAplica($habitacion, $codigo, $inicio, $fin){
+        try {
+            $stmt = DataBase::connect()->prepare("UPDATE Aplica SET FInicio = ?, FFin = ? WHERE IdHabitacion LIKE ? AND IdCodigo LIKE ?");
+            $stmt->execute([$inicio, $fin, $habitacion, $codigo]);
+            return true;
+        } catch (PDOException $e) {
+            return "Error al actualizar el aplicado: " . $e->getMessage();
+        }
     }
 
-    public function getDescuento() {
-        return $this->descuento;
+    public static function checkAplicar($habitacion, $codigo){
+        try {
+            $stmt = DataBase::connect()->prepare("SELECT IdHabitacion, IdCodigo FROM Aplica WHERE IdHabitacion LIKE ? AND IdCodigo LIKE ?");
+            $stmt->execute([$habitacion, $codigo]);
+            $aplica = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $aplica;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
-    public function setDescuento($descuento) {
-        $this->descuento = $descuento;
+
+    public static function selectAllAplica(){
+        try {
+            $stmt = DataBase::connect()->prepare("SELECT * FROM Aplica a JOIN CodigoPromocional c ON a.IdCodigo = c.IdCodigo JOIN Habitacion h ON a.IdHabitacion = h.IdHabitacion;");
+            $stmt->execute();
+            $aplica = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $aplica;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public static function deleteAplica($habitacion, $codigo){
+        try {
+            $stmt = DataBase::connect()->prepare("DELETE FROM Aplica WHERE IdHabitacion LIKE ? AND IdCodigo LIKE ?");
+            $stmt->execute([$habitacion, $codigo]);
+            return true;
+        } catch (PDOException $e) {
+            return "Error al eliminar el aplicar: " . $e->getMessage();
+        }
     }
 }
 ?>

@@ -1,6 +1,8 @@
 <?php
     require_once('models/db_model.php');
     require_once('models/room_model.php');
+    require_once('models/suite_model.php');
+    require_once('models/vip_model.php');
     require_once('models/hotel_model.php');
 
     if(isset($_POST['insertar'])){
@@ -28,7 +30,12 @@
         if(!empty($habitacion) && $habitacion[0]['nombre'] == $_POST['nombre']){
             echo "Ya existe esta habitación";
         }else{
-            createRoom($_POST['nombre'], $_POST['tipo'], $_POST['npersonas'], $_POST['precio'], $_POST['m2'], $_POST['hotel'], $img_name, $_POST['vip']);
+            $id = createRoom($_POST['nombre'], $_POST['tipo'], $_POST['npersonas'], $_POST['precio'], $_POST['m2'], $_POST['hotel'], $img_name, $_POST['vip']);
+            if($_POST['tipo'] == "suite"){
+                Suite::createSuite($id);
+            }elseif ($_POST['tipo'] == "vip") {
+                vip::createVIP($id,$_POST['vip']);
+            }
             file_put_contents($file_path, $img_data);
         }
     }
@@ -47,7 +54,7 @@
         buscar($_POST['lugar'],$_POST['npersonas'],$_POST['entrada'],$_POST['salida']);
     }
     if(isset($_POST['CompVIP'])){
-        $habitacion = Habitacion::checkVIP($_POST['habitacion'],$_POST['vip']);
+        $habitacion = vip::checkVIP($_POST['habitacion'],$_POST['vip']);
         if(!empty($habitacion)){
             echo true;
         }else{
@@ -64,7 +71,7 @@
         if ($habitaciones != false) {
             foreach ($habitaciones as &$room) {
                 $room['FK_IdHotel'] = Hotel::selectHotel($room['FK_IdHotel'])['Nombre'];
-                $room['suite'] = Habitacion::selectSuite($room['IdHabitacion']);
+                $room['suite'] = Suite::selectSuite($room['IdHabitacion']);
                 $room['camas'] = selectAllCamaRoom($room['IdHabitacion']);
             }
         }
@@ -78,7 +85,7 @@
             foreach ($rooms as &$room) {
                 $room['hotel_ubi'] = Hotel::selectHotel($room['FK_IdHotel'])['Ubicacion'];
                 $room['FK_IdHotel'] = Hotel::selectHotel($room['FK_IdHotel'])['Nombre'];
-                $room['suite'] = Habitacion::selectSuite($room['IdHabitacion']);
+                $room['suite'] = Suite::selectSuite($room['IdHabitacion']);
             }
         }
         return $rooms;
@@ -90,7 +97,7 @@
             foreach ($rooms as &$room) {
                 $room['hotel_ubi'] = Hotel::selectHotel($room['FK_IdHotel'])['Ubicacion'];
                 $room['FK_IdHotel'] = Hotel::selectHotel($room['FK_IdHotel'])['Nombre'];
-                $room['suite'] = Habitacion::selectSuite($room['IdHabitacion']);
+                $room['suite'] = Suite::selectSuite($room['IdHabitacion']);
             }
         }
         return $rooms;
@@ -113,7 +120,7 @@
             foreach ($rooms as &$room) {
                 $room['hotel_ubi'] = Hotel::selectHotel($room['FK_IdHotel'])['Ubicacion'];
                 $room['FK_IdHotel'] = Hotel::selectHotel($room['FK_IdHotel'])['Nombre'];
-                $room['suite'] = Habitacion::selectSuite($room['IdHabitacion']);
+                $room['suite'] = Suite::selectSuite($room['IdHabitacion']);
                 $room['camas'] = selectAllCamaRoom($room['IdHabitacion']);
             }
         }
@@ -127,7 +134,7 @@
         if ($rooms != false) {
             foreach ($rooms as &$room) {
                 $room['FK_IdHotel'] = Hotel::selectHotel($room['FK_IdHotel'])['Nombre'];
-                $room['suite'] = Habitacion::selectSuite($room['IdHabitacion']);
+                $room['suite'] = Suite::selectSuite($room['IdHabitacion']);
                 $room['camas'] = selectAllCamaRoom($room['IdHabitacion']);
             }
         }
@@ -135,7 +142,7 @@
     }
 
     function selectAllSuite(){
-        $rooms = Habitacion::selectAllSuite();
+        $rooms = Suite::selectAllSuite();
         if (empty($rooms)) {
             $rooms = [];
         }
@@ -146,7 +153,7 @@
     }
 
     function selectAllSuiteGerente(){
-        $rooms = Habitacion::selectAllSuiteGerente($_SESSION['id']);
+        $rooms = Suite::selectAllSuiteGerente($_SESSION['id']);
         if (empty($rooms)) {
             $rooms = [];
         }
@@ -157,7 +164,7 @@
     }
 
     function createRoom($nombre, $tipo, $nPersonas, $precioUnitario, $m2, $fkIdHotel, $img, $vip){
-        echo Habitacion::createRoom($nombre, $tipo, $nPersonas, $precioUnitario, $m2, $fkIdHotel, $img, $vip);
+        return Habitacion::createRoom($nombre, $tipo, $nPersonas, $precioUnitario, $m2, $fkIdHotel, $img, $vip);
     }
 
     function deleteRoom($id){
