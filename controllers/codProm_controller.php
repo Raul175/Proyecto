@@ -35,7 +35,91 @@
             echo false;
         }
     }
+
+    if(isset($_POST['aplicar'])){
+        $aplicaciones = CodigoPromocional::checkAplicar($_POST['habitacion'], $_POST['codigo']);
+        if(!empty($aplicaciones) && $aplicaciones['IdCodigo'] == $_POST['codigo'] && $aplicaciones['IdHabitacion'] == $_POST['habitacion']){
+            echo "Ya existe esta aplicación";
+        }else{
+            aplicarCodProm($_POST['habitacion'], $_POST['codigo'], $_POST['finicio'], $_POST['fin']);
+        }
+    }
+    if(isset($_POST['update'])){
+        $aplicaciones = CodigoPromocional::checkAplicar($_POST['habitacion'], $_POST['codigo']);
+        // if(!empty($aplicaciones) && $aplicaciones['IdCodigo'] == $_POST['codigo'] && $aplicaciones['IdHabitacion'] == $_POST['IdCodigo']){
+        //     echo "Ya existe esta aplicación";
+        // }else{
+            updateAplica($_POST['habitacion'], $_POST['codigo'], $_POST['finicio'], $_POST['fin']);
+        // }
+    }
+    if(isset($_POST['eliminar1'])){
+        deleteAplica($_POST['habitacion'], $_POST['codigo']);
+    }
     
+    function selectAllAplica(){
+        require_once('controllers/room_controller.php');
+        $habitaciones = selectAllRooms();
+        if(empty($habitaciones)){
+            $habitaciones =  [];
+        }
+        $aplicados = CodigoPromocional::selectAllAplica();
+        if(empty($aplicados)){
+            $aplicados = [];
+        }
+        $codAplicados = [];
+
+        foreach ($habitaciones as $habitacion) {
+            $codAplicados[$habitacion['IdHabitacion']] = [
+                'habitacion' => $habitacion,
+                'codigos' => []
+            ];
+            foreach ($aplicados as &$aplicado) {
+                if($habitacion['IdHabitacion'] == $aplicado['IdHabitacion']){
+                    $codAplicados[$habitacion['IdHabitacion']]['codigos'][] = $aplicado;
+                }
+            }
+        }
+
+        return $codAplicados;
+    }
+
+    function selectAllAplicaGerente(){
+        $habitaciones = selectAllRoomsGerente($_SESSION['id']);
+        if(empty($habitaciones)){
+            $habitaciones =  [];
+        }
+        $aplicados = CodigoPromocional::selectAllAplica();
+        if(empty($aplicados)){
+            $aplicados = [];
+        }
+        $codAplicados = [];
+
+        foreach ($habitaciones as $habitacion) {
+            $codAplicados[$habitacion['IdHabitacion']] = [
+                'habitacion' => $habitacion,
+                'codigos' => []
+            ];
+            foreach ($aplicados as &$aplicado) {
+                if($habitacion['IdHabitacion'] == $aplicado['IdHabitacion']){
+                    $codAplicados[$habitacion['IdHabitacion']]['codigos'][] = $aplicado;
+                }
+            }
+        }
+
+        return $codAplicados;
+    }
+
+    function aplicarCodProm($habitacion, $codigo, $inicio, $fin){
+        echo CodigoPromocional::aplicarCodProm($habitacion, $codigo, $inicio, $fin);
+    }
+
+    function updateAplica($habitacion, $codigo, $inicio, $fin){
+        echo CodigoPromocional::updateAplica($habitacion, $codigo, $inicio, $fin);
+    }
+
+    function deleteAplica($habitacion, $codigo){
+        echo CodigoPromocional::deleteAplica($habitacion, $codigo);
+    }
 
     function selectAllCodProm(){
         return CodigoPromocional::selectAllCodProm();

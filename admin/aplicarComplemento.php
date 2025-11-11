@@ -1,5 +1,4 @@
 <?php
-    require_once('controllers/aplicaComplemento_controller.php');
     require_once('controllers/complemento_controller.php');
     $complementos = selectAllComplemento();
     if (empty($complementos)) {
@@ -296,7 +295,7 @@
 
             if (error == 0) {
                 $.ajax({
-                    url: '/Proyecto/aplicaComplementoController',
+                    url: '/Proyecto/complementoController',
                     type: 'POST',
                     data: {
                         complemento : complemento,
@@ -339,12 +338,12 @@
                 const habitacion = $(this).find("#idHabitacion1").val();
 
                 $.ajax({
-                    url: '/Proyecto/aplicaComplementoController',
+                    url: '/Proyecto/complementoController',
                     type: 'POST',
                     data: {
                         complemento : complemento,
                         habitacion : habitacion,
-                        eliminar : 1
+                        eliminar1 : 1
                     },
                     success: function(response) {
                         window.location.href = "/Proyecto/admin/aplicarComplemento";

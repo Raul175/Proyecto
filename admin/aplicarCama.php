@@ -1,5 +1,4 @@
 <?php
-    require_once('controllers/aplicaCama_controller.php');
     require_once('controllers/cama_controller.php');
     $camas = selectAllCama();
     if (empty($camas)) {
@@ -295,7 +294,7 @@
 
             if (error == 0) {
                 $.ajax({
-                    url: '/Proyecto/aplicaCamaController',
+                    url: '/Proyecto/camaController',
                     type: 'POST',
                     data: {
                         cama : cama,
@@ -338,12 +337,12 @@
                 const habitacion = $(this).find("#idHabitacion1").val();
 
                 $.ajax({
-                    url: '/Proyecto/aplicaCamaController',
+                    url: '/Proyecto/camaController',
                     type: 'POST',
                     data: {
                         cama : cama,
                         habitacion : habitacion,
-                        eliminar : 1
+                        eliminar1 : 1
                     },
                     success: function(response) {
                         window.location.href = "/Proyecto/admin/aplicarCama";

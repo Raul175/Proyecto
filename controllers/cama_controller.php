@@ -21,6 +21,18 @@
     if(isset($_POST['eliminar'])){
         deleteCama($_POST['id']);
     }
+
+    if(isset($_POST['aplicar'])){
+        $aplicaciones = Cama::checkAplicar($_POST['habitacion'], $_POST['cama']);
+        //if(!empty($aplicaciones) && $aplicaciones['IdCama'] == $_POST['cama'] && $aplicaciones['IdHabitacion'] == $_POST['habitacion']){
+        //    echo "Ya existe esta aplicación";
+        //}else{
+            aplicarCama($_POST['habitacion'], $_POST['cama']);
+        //}
+    }
+    if(isset($_POST['eliminar1'])){
+        deleteAplica($_POST['habitacion'], $_POST['cama']);
+    }
     
 
     function selectAllCama(){
@@ -41,5 +53,66 @@
 
     function updateCama($id, $tipo){
         echo Cama::updateCama($id, $tipo);
+    }
+
+    function selectAllAplica(){
+        require_once('controllers/room_controller.php');
+        $habitaciones = selectAllRooms();
+        if(empty($habitaciones)){
+            $habitaciones =  [];
+        }
+        $aplicados = Cama::selectAllAplica();
+        if(empty($aplicados)){
+            $aplicados = [];
+        }
+        $codAplicados = [];
+
+        foreach ($habitaciones as $habitacion) {
+            $codAplicados[$habitacion['IdHabitacion']] = [
+                'habitacion' => $habitacion,
+                'camas' => []
+            ];
+            foreach ($aplicados as $aplicado) {
+                if($habitacion['IdHabitacion'] == $aplicado['IdHabitacion']){
+                    $codAplicados[$habitacion['IdHabitacion']]['camas'][] = $aplicado;
+                }
+            }
+        }
+
+        return $codAplicados;
+    }
+
+    function selectAllAplicaGerente(){
+        $habitaciones = selectAllRoomsGerente($_SESSION['id']);
+        if(empty($habitaciones)){
+            $habitaciones =  [];
+        }
+        $aplicados = Cama::selectAllAplica();
+        if(empty($aplicados)){
+            $aplicados = [];
+        }
+        $codAplicados = [];
+
+        foreach ($habitaciones as $habitacion) {
+            $codAplicados[$habitacion['IdHabitacion']] = [
+                'habitacion' => $habitacion,
+                'camas' => []
+            ];
+            foreach ($aplicados as $aplicado) {
+                if($habitacion['IdHabitacion'] == $aplicado['IdHabitacion']){
+                    $codAplicados[$habitacion['IdHabitacion']]['camas'][] = $aplicado;
+                }
+            }
+        }
+
+        return $codAplicados;
+    }
+
+    function aplicarCama($habitacion, $cama){
+        echo Cama::aplicarCama($habitacion, $cama);
+    }
+    
+    function deleteAplica($habitacion, $cama){
+        echo Cama::deleteAplica($habitacion, $cama);
     }
 ?>

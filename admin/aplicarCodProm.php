@@ -1,5 +1,4 @@
 <?php
-    require_once('controllers/aplicaCodProm_controller.php');
     require_once('controllers/codProm_controller.php');
     $codigos = selectAllCodProm();
     if (empty($codigos)) {
@@ -526,7 +525,7 @@
 
                 if (error == 0) {
                     $.ajax({
-                        url: '/Proyecto/aplicaCodPromController',
+                        url: '/Proyecto/codPromController',
                         type: 'POST',
                         data: {
                             codigo : codigo,
@@ -560,12 +559,12 @@
                 const habitacion = $(this).find("#idHabitacion1").val();
 
                 $.ajax({
-                    url: '/Proyecto/aplicaCodPromController',
+                    url: '/Proyecto/codPromController',
                     type: 'POST',
                     data: {
                         codigo : codigo,
                         habitacion : habitacion,
-                        eliminar : 1
+                        eliminar1 : 1
                     },
                     success: function(response) {
                         window.location.href = "/Proyecto/admin/aplicarCodProm";
