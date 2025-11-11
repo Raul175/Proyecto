@@ -1,24 +1,24 @@
 <?php
 abstract class users{
-        private $nombre;
-        private $apellidos;
-        private $correo;
-        private $contraseña;
-        private $dni;
-        private $sexo;
-        private $domicilio;
-        private $fNacimiento;
-        private $admin;
+        protected $nombre;
+        protected $apellidos;
+        protected $correo;
+        protected $contraseña;
+        protected $dni;
+        protected $sexo;
+        // protected $domicilio;
+        // protected $fNacimiento;
+        protected $admin;
 
-        public function __construct($nombre,$apellidoss,$correo,$contraseña,$dni,$sexo,$domicilio,$fNacimiento,$admin) {
+        public function __construct($nombre,$apellidoss,$correo,$contraseña,$dni,$sexo,$admin) {
                 $this->nombre = $nombre;
                 $this->apellidos = $apellidoss;
                 $this->correo = $correo;
                 $this->contraseña = $contraseña;
                 $this->dni = $dni;
                 $this->sexo = $sexo;
-                $this->domicilio = $domicilio;
-                $this->fNacimiento = $fNacimiento;
+                // $this->domicilio = $domicilio;
+                // $this->fNacimiento = $fNacimiento;
                 $this->admin = $admin;
         }
 
@@ -45,27 +45,6 @@ abstract class users{
                 header("Location: /Proyecto/");
         }
 
-        public static function createUser($nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio, $fNacimiento, $admin = 0){
-                 try {
-                        $stmt = DataBase::connect()->prepare("INSERT INTO Usuario (Nombre, Apellidos, Correo, Contrasena, DNI, Sexo, Domicilio, FNacimiento, Admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                        $stmt->execute([$nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio,  $fNacimiento, $admin]);
-                        return true;
-                 } catch (PDOException $e) {
-                         return false;
-                 }
-        }
-
-        public static function selectAllUsers(){
-                try {
-                        $stmt = DataBase::connect()->prepare("SELECT * FROM Usuario");
-                        $stmt->execute();
-                        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                        return $users;
-                } catch (PDOException $e) {
-                        return false;
-                }
-        }
-
         public static function selectAllUsersGerente(){
                 try {
                         $stmt = DataBase::connect()->prepare("SELECT * FROM Usuario WHERE admin LIKE 2");
@@ -77,23 +56,14 @@ abstract class users{
                 }
         }
 
-        public static function deleteUser($id = 0){
+        public static function selectAllUsers(){
                 try {
-                        $stmt = DataBase::connect()->prepare("DELETE FROM Usuario WHERE idUsuario LIKE ?");
-                        $stmt->execute([$id]);
-                        return true;
+                        $stmt = DataBase::connect()->prepare("SELECT * FROM Usuario");
+                        $stmt->execute();
+                        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        return $users;
                 } catch (PDOException $e) {
-                        return "Error al eliminar el usuario: " . $e->getMessage();
-                }
-        }
-
-        public static function updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio, $fNacimiento, $admin){
-                try {
-                        $stmt = DataBase::connect()->prepare("UPDATE Usuario SET Nombre = ?, Apellidos = ?, Correo = ?, Contrasena = ?, DNI = ?, Sexo = ?, Domicilio = ?, FNacimiento = ?, Admin = ? WHERE idUsuario LIKE ?");
-                        $stmt->execute([$nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio, $fNacimiento, $admin, $id]);
-                        return true;
-                } catch (PDOException $e) {
-                        return "Error al actualizar el usuario: " . $e->getMessage();
+                        return false;
                 }
         }
 

@@ -304,7 +304,6 @@
                         login : 1
                     },
                     success: function(response) {
-                        alert(response);
                         if (response == 1) {
                             window.location.href = "/Proyecto/admin";
                         } else if (response == 2) {

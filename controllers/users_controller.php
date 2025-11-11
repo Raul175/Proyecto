@@ -1,6 +1,9 @@
 <?php
     require_once('models/db_model.php');
     require_once('models/users_model.php');
+    require_once('models/client_model.php');
+    require_once('models/admin_model.php');
+    require_once('models/gerente_model.php');
 
     if(!isset($_POST['admin'])){
         $_POST['admin'] = 0;
@@ -57,14 +60,21 @@
     }
 
     function createUser($nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio, $nacimiento, $admin){
-        echo users::createUser($nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio, $nacimiento, $admin);
+        $id = admin::createUser($nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin);
+        if ($admin == 0) {
+            echo cliente::createClient($id, $domicilio, $nacimiento);
+        }elseif ($admin == 2) {
+            echo admin::createAdmin($id);
+        }else{
+            echo gerente::createGerente($id, $nacimiento);
+        }
     }
 
     function deleteUser($id){
-        echo users::deleteUser($id);
+        echo admin::deleteUser($id);
     }
 
     function updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio, $nacimiento, $admin){
-        echo users::updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio, $nacimiento, $admin);
+        echo admin::updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin);
     }
 ?>
