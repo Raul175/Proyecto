@@ -6,7 +6,7 @@ class admin extends users {
     }
 
     public static function createAdmin($id){
-        $stmt = DataBase::connect()->prepare("INSERT INTO Gerente (IdUsuario) VALUES (?)");
+        $stmt = DataBase::connect()->prepare("INSERT INTO Admin (IdUsuario) VALUES (?)");
         $stmt->execute([$id]);
     }
 
@@ -34,9 +34,11 @@ class admin extends users {
 
     public static function updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin){
         try {
-                $stmt = DataBase::connect()->prepare("UPDATE Usuario SET Nombre = ?, Apellidos = ?, Correo = ?, Contrasena = ?, DNI = ?, Sexo = ?, Admin = ? WHERE idUsuario LIKE ?");
+                $conn = DataBase::connect();
+                $stmt = $conn->prepare("UPDATE Usuario SET Nombre = ?, Apellidos = ?, Correo = ?, Contrasena = ?, DNI = ?, Sexo = ?, Admin = ? WHERE idUsuario LIKE ?");
                 $stmt->execute([$nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin, $id]);
-                return true;
+                $id = $conn->lastInsertId();
+                return (int) trim($id);
         } catch (PDOException $e) {
                 return "Error al actualizar el usuario: " . $e->getMessage();
         }

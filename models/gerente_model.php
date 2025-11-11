@@ -12,5 +12,15 @@ class gerente extends users {
         $stmt->execute([$id, $fNacimiento]);
     }
 
+    public static function updateGerente($id, $fNacimiento){
+        try {
+                $stmt = DataBase::connect()->prepare("UPDATE Gerente SET fNacimiento = ? WHERE idUsuario LIKE ?");
+                $stmt->execute([$fNacimiento, $id]);
+                return true;
+        } catch (PDOException $e) {
+                return "Error al actualizar el usuario: " . $e->getMessage();
+        }
+    }
+
 }
 ?>

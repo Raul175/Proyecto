@@ -75,6 +75,11 @@
     }
 
     function updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio, $nacimiento, $admin){
-        echo admin::updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin);
+        $id = admin::updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin);
+        if ($admin == 0) {
+            echo cliente::updateClient($id, $domicilio, $nacimiento);
+        }elseif ($admin == 1) {
+            echo gerente::updateGerente($id, $nacimiento);
+        }
     }
 ?>
