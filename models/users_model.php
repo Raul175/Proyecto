@@ -6,8 +6,6 @@ abstract class users{
         protected $contraseña;
         protected $dni;
         protected $sexo;
-        // protected $domicilio;
-        // protected $fNacimiento;
         protected $admin;
 
         public function __construct($nombre,$apellidoss,$correo,$contraseña,$dni,$sexo,$admin) {
@@ -17,8 +15,6 @@ abstract class users{
                 $this->contraseña = $contraseña;
                 $this->dni = $dni;
                 $this->sexo = $sexo;
-                // $this->domicilio = $domicilio;
-                // $this->fNacimiento = $fNacimiento;
                 $this->admin = $admin;
         }
 

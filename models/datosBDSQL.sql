@@ -1,5 +1,3 @@
-
-
 -- Insert de datos de las localidades
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Álava', '01000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Albacete', '02000');
@@ -53,6 +51,29 @@ INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Valladolid', '47000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Bizkaia', '48000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Zamora', '49000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Zaragoza', '50000');
+
+-- Usuarios
+-- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('admin123', 'admin admin', 'admin@rolvahotels.com', SHA2('admin@3000', 256), '29292929W', 'hombre', 1);
+-- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('raul', 'gonzalez alvarez', 'raul@rolvahotels.com', SHA2('raul$123', 256), '29292921J', 'hombre', 1);
+-- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('gerente123', 'gerente gerente', 'gerente@rolvahotels.com', SHA2('gerente$123', 256), '29292921J', 'hombre', 2);
+-- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Carlos', 'Gomez Perez', 'carlos.gomez@gmail.com', SHA2('carlos123', 256), '12345678A', 'hombre', 0);
+-- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Lucia', 'Martínez Ruiz', 'lucia.martinez@gmail.com', SHA2('lucia123', 256), '87654321B', 'mujer', 0);
+-- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Juan', 'Perez Garcia', 'juan.perez@gmail.com', SHA2('pass123', 256), '12345678A', 'hombre', 0);
+-- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Ana', 'Lopez Martin', 'ana.lopez@gmail.com', SHA2('pass123', 256), '87654321B', 'mujer', 0);
+-- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Carlos', 'Sánchez Ruiz', 'carlos.sanchez@gmail.com', SHA2('pass123', 256), '11223344C', 'hombre', 0);
+-- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('pepe', 'pepito pepito', 'pepito123@gmail.com', SHA2('pepito_1', 256), '11222344C', 'hombre', 2);
+-- Clientes
+INSERT INTO Cliente (idUsuario, domicilio, FNacimiento) VALUES (4, 'Calle Mayor 12', '1990-05-10');
+INSERT INTO Cliente (idUsuario, domicilio, FNacimiento) VALUES (5, 'Avda. Andalucía 34', '1995-08-15');
+INSERT INTO Cliente (idUsuario, domicilio, FNacimiento) VALUES (6, 'Calle Falsa 123', '1985-05-12');
+INSERT INTO Cliente (idUsuario, domicilio, FNacimiento) VALUES (7, 'Av. Siempre Viva 742', '1990-10-01');
+INSERT INTO Cliente (idUsuario, domicilio, FNacimiento) VALUES (8, 'Paseo de la Reforma 10', '1978-03-22');
+-- Gerentes
+INSERT INTO Gerente (idUsuario, FNacimiento) VALUES (3, '2005-12-20');
+INSERT INTO Gerente (idUsuario, FNacimiento) VALUES (9, '1971-03-22');
+-- Admins
+INSERT INTO Administrador (idUsuario) VALUES (1);
+INSERT INTO Administrador (idUsuario) VALUES (2);
 
 -- Insert de datos hoteles
 INSERT INTO Hotel (Nombre, Ubicacion, FK_IdLocalidad, FK_IdUsuario) VALUES ('Hotel Mirador', 'Calle Mayor 12', 1, 3); -- alava
@@ -197,6 +218,6 @@ INSERT INTO Obtiene (IdHabitacion, IdComplemento) VALUES
 
 -- Reserva
 INSERT INTO Reserva (IdUsuario, IdHabitacion, IdFactura, FComienzo, FInicio, FFin, nombre, correo, codigo, vip, complemento, Estado, Incidencia) VALUES
-(3, 1, 1, '2024-06-01 14:00:00', '2025-06-05', '2025-06-10', 'Juan Perez', 'juan.perez@gmail.com', 'PROMO10', 'no', '', 'Pagado', ''),
-(4, 2, 2, '2024-06-07 16:00:00', '2025-07-20', '2025-07-25', 'Ana Lopez', 'ana.lopez@gmail.com', 'VERANO15', 'si', 'desayuno', 'pendiente', ''),
-(5, 3, 3, '2024-06-12 12:00:00', '2025-08-15', '2025-08-18', 'Carlos Sanchez', 'carlos.sanchez@gmail.com', 'NAVIDAD20', 'no', '', 'Cancelado', 'Cliente no se presento');
+(6, 1, 1, '2024-06-01 14:00:00', '2025-06-05', '2025-06-10', 'Juan Perez', 'juan.perez@gmail.com', 'PROMO10', 'no', '', 'Pagado', ''),
+(7, 2, 2, '2024-06-07 16:00:00', '2025-07-20', '2025-07-25', 'Ana Lopez', 'ana.lopez@gmail.com', 'VERANO15', 'si', 'desayuno', 'pendiente', ''),
+(8, 3, 3, '2024-06-12 12:00:00', '2025-08-15', '2025-08-18', 'Carlos Sanchez', 'carlos.sanchez@gmail.com', 'NAVIDAD20', 'no', '', 'Cancelado', 'Cliente no se presento');

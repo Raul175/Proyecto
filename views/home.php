@@ -15,6 +15,10 @@
     if (empty($comentarios)){
         $comentarios = [];
     }
+
+    if (isset($_SESSION['admin'])) {
+        echo $_SESSION['admin'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

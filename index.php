@@ -23,11 +23,11 @@
 
     //Rutas a las views del admin
     $router->get("/admin", function(){ 
-        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
+        //if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
             include "admin/admin.php";unset($_SESSION['habitaciones']); 
-        }else{
-            header("Location: /Proyecto");
-        }
+        //}else{
+        //    header("Location: /Proyecto");
+        //}
     });
     $router->get("/admin/habitaciones", function(){ 
         if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){

@@ -5,7 +5,7 @@
     require_once('controllers/localidad_controller.php');
 
     if(isset($_GET['createDB'])){
-        createDB();
+        echo createDB();
     }elseif (isset($_GET['deleteDB'])) {
         deleteDB();
     }elseif (isset($_GET['cerrarSesion'])) {
