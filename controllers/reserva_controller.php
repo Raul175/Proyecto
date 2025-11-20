@@ -1,6 +1,8 @@
 <?php
     require_once('models/db_model.php');
     require_once('models/reserva_model.php');
+    require_once('models/room_model.php');
+    require_once('models/suite_model.php');
     require_once('controllers/factura_controller.php');
 
     use PHPMailer\PHPMailer\PHPMailer;
@@ -20,7 +22,7 @@
         }
         if($tipo == "vip"){
             require_once('models/room_model.php');
-            if (Habitacion::comprobarSuite($habitacion)['Codigo'] != $vip || $vip == "") {
+            if (Suite::comprobarSuite($habitacion)['Codigo'] != $vip || $vip == "") {
                 echo "El campo de codigo VIP es incorrecto";
                 return;
             }

@@ -699,7 +699,6 @@
                     success: function(response) {
                         if (response == true) {
                             window.location.href = "/Proyecto/user";
-                            alert("Modificación realizada");
                         } else {
                             $("#error-message").html(response);
                             $("#error-message").show();
