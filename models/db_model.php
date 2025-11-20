@@ -25,11 +25,11 @@ class DataBase{
             $usuarios = [
                ['admin123', 'admin admin', 'admin@rolvahotels.com', 'admin@3000', '29292929W', 'hombre', 1],
                ['raul', 'gonzalez alvarez', 'raul@rolvahotels.com', 'raul$123', '29292921J', 'hombre', 1],
-               ['gerente123', 'gerente gerente', 'gerente@rolvahotels.com', 'gerente$123', '29292921J', 'hombre', 2],
+               ['gerente123', 'gerente gerente', 'gerente@rolvahotels.com', 'gerente$123', '24292921Q', 'hombre', 2],
                ['Carlos', 'Gomez Perez', 'carlos.gomez@gmail.com', 'carlos123', '12345678A', 'hombre', 0],
                ['Lucia', 'Martínez Ruiz', 'lucia.martinez@gmail.com', 'lucia123', '87654321B', 'mujer', 0],
                ['Juan', 'Perez Garcia', 'juan.perez@gmail.com', 'pass123', '12345678A', 'hombre', 0],
-               ['Ana', 'Lopez Martin', 'ana.lopez@gmail.com', 'pass123', '87654321B', 'mujer', 0],
+               ['Ana', 'Lopez Martin', 'ana.lopez@gmail.com', 'pass123', '87654524N', 'mujer', 0],
                ['Carlos', 'Sánchez Ruiz', 'carlos.sanchez@gmail.com', 'pass123', '11223344C', 'hombre', 0],
                ['pepe', 'pepito pepito', 'pepito123@gmail.com', 'pepito_1', '11222344C', 'hombre', 2],
             ];

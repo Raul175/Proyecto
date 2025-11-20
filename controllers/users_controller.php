@@ -23,7 +23,7 @@
     if(isset($_POST['actualizar'])){
         $usuario = users::checkUser($_POST['correo'], $_POST['dni']);
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        if(!empty($usuario) && ($usuario['Correo'] == $_POST['correo'] || $usuario['DNI'] == $_POST['dni'])  && $usuario['IdUsuario'] != $_POST['id']){
+        if(!empty($usuario) && ($usuario['Correo'] == $_POST['correo'] || $usuario['DNI'] == $_POST['dni']) && $usuario['IdUsuario'] != $_POST['id']){
             echo "Ya existe este usuario";
         }else{
             updateUser($_POST['id'],$_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $password, $_POST['dni'], $_POST['sexo'], $_POST['domicilio'], $_POST['nacimiento'], $_POST['admin']);
@@ -63,7 +63,7 @@
         $id = admin::createUser($nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin);
         if ($admin == 0) {
             echo cliente::createClient($id, $domicilio, $nacimiento);
-        }elseif ($admin == 2) {
+        }elseif ($admin == 1) {
             echo admin::createAdmin($id);
         }else{
             echo gerente::createGerente($id, $nacimiento);
@@ -75,10 +75,10 @@
     }
 
     function updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio, $nacimiento, $admin){
-        $id = admin::updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin);
+        admin::updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin);
         if ($admin == 0) {
             echo cliente::updateClient($id, $domicilio, $nacimiento);
-        }elseif ($admin == 1) {
+        }elseif ($admin == 2) {
             echo gerente::updateGerente($id, $nacimiento);
         }
     }

@@ -83,7 +83,7 @@
                 <div class="col-lg-6">
                     <h2 class="mb-3"><?= $habitacion['Nombre'] ?><?= empty($habitacion['Tipo']) ? "" : " - ". $habitacion['Tipo'] ?></h2>
                     <p><i class="fa fa-map-marker-alt text-primary me-2"></i><b> Hotel: </b> <?= $habitacion['FK_IdHotel'] ?></p>
-                    <p><i class="fas fa-map me-2"></i><b>Direccion:</b> <?= $habitacion['hotel_ubi'] ?> <i class="fas fa-envelope me-2"></i><b>Codigo Postal:</b> <?= $habitacion['localidad'] ?></p>
+                    <p><i class="fas fa-map me-2"></i><b>Direccion:</b> <?= $habitacion['hotel_ubi'] ?> <i class="fas fa-envelope me-2"></i><b>Codigo Postal:</b> <?= $habitacion['hotel_ubi'] ?></p>
                     <p><strong>Precio:</strong> <?= $habitacion['PrecioUnitario'] ?>€/Noche</p>
                     <p><strong>Capacidad:</strong> <?= $habitacion['NPersonas'] ?> personas</p>
                     <p><strong>Camas: <br></strong> 

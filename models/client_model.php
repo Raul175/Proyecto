@@ -10,13 +10,18 @@ class cliente extends users {
     }
 
     public static function createClient($id, $domicilio,$fNacimiento){
-        $stmt = DataBase::connect()->prepare("INSERT INTO Cliente (IdHabitacion, domicilio, FNacimiento) VALUES (?, ?, ?)");
-        $stmt->execute([$id, $domicilio, $fNacimiento]);
+        try {
+            $stmt = DataBase::connect()->prepare("INSERT INTO Cliente (IdUsuario, domicilio, FNacimiento) VALUES (?, ?, ?)");
+            $stmt->execute([$id, $domicilio, $fNacimiento]);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
-    public static function updateClient($id, $fNacimiento, $domicilio){
+    public static function updateClient($id, $domicilio, $fNacimiento){
         try {
-                $stmt = DataBase::connect()->prepare("UPDATE Gerente SET FNacimiento = ?, Domicilio = = ? WHERE idUsuario LIKE ?");
+                $stmt = DataBase::connect()->prepare("UPDATE Cliente SET FNacimiento = ?, Domicilio = ? WHERE idUsuario LIKE ?");
                 $stmt->execute([$fNacimiento, $domicilio, $id]);
                 return true;
         } catch (PDOException $e) {

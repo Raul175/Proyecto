@@ -99,9 +99,7 @@
                                             <th class="d-none d-lg-table-cell">Correo</th>
                                             <th>DNI</th>
                                             <th>Sexo</th>
-                                            <th>Domicilio</th>
-                                            <th class="d-none d-lg-table-cell">Fecha Nacimiento</th>
-                                            <th>Admin</th>
+                                            <th>Tipo</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -113,9 +111,15 @@
                                             <td class="d-none d-lg-table-cell"><?= $usuario['Correo'] ?></td>
                                             <td><?= $usuario['DNI'] ?></td>
                                             <td><?= $usuario['Sexo'] ?></td>
-                                            <td><?= $usuario['Domicilio'] ?></td>
-                                            <td class="d-none d-lg-table-cell"><?= date('d/m/Y', strtotime($usuario['FNacimiento'])) ?></td>
-                                            <td class="col-1"><?= $usuario['Admin'] == 0 ? "No" : "Si"; ?></td>
+                                            <td class="col-1"><?php 
+                                                if ($usuario['Admin'] == 0) {
+                                                    echo "usuario";
+                                                }elseif ($usuario['Admin'] == 2) {
+                                                    echo "gerente";
+                                                }else{
+                                                    echo "admin";
+                                                }
+                                            ?></td>
                                             <td class="col-1 text-center align-middle">
                                                 <i class="fas fa-trash fa-sm mr-2" data-toggle="modal" style="cursor: pointer" data-target="#eliminar<?= $usuario['IdUsuario'] ?>"></i>
                                                 <i class="fas fa-edit fa-sm" data-toggle="modal" style="cursor: pointer" data-target="#actualizar<?= $usuario['IdUsuario'] ?>"></i>
@@ -217,24 +221,54 @@
                                                                         ?>
                                                                     </select>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="domicilio">Domicilio</label>
-                                                                    <input type="domicilio" class="form-control" value="<?= $usuario['Domicilio'] ?>" name="domicilio" id="domicilio">
-                                                                    <div class="invalid-feedback" style="display: none;" id="domicilio-error">
-                                                                        El domicilio está mal introducido (máx. 50 caracteres).
+                                                                <?php if ($usuario['Admin'] == 0){ ?>
+                                                                    <div class="form-group">
+                                                                        <label for="domicilio">Domicilio</label>
+                                                                        <input type="domicilio" class="form-control" value="<?= $usuario['Domicilio'] ?>" name="domicilio" id="domicilio">
+                                                                        <div class="invalid-feedback" style="display: none;" id="domicilio-error">
+                                                                            El domicilio está mal introducido (máx. 50 caracteres).
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="nacimiento">Fecha Nacimiento</label>
-                                                                    <input type="date" class="form-control" name="nacimiento" value="<?= $usuario['FNacimiento'] ?>" id="nacimiento">
-                                                                    <div class="invalid-feedback" style="display: none;" id="nacimiento-error">
-                                                                        Introduce la fecha de nacimiento.
+                                                                <?php } ?>
+                                                                <?php if ($usuario['Admin'] == 0 || $usuario['Admin'] == 2){ ?>
+                                                                    <div class="form-gsroup">
+                                                                        <label for="nacimiento">Fecha Nacimiento</label>
+                                                                        <input type="date" class="form-control" name="nacimiento" value="<?= $usuario['FNacimiento'] ?>" id="nacimiento">
+                                                                        <div class="invalid-feedback" style="display: none;" id="nacimiento-error">
+                                                                            Introduce la fecha de nacimiento.
+                                                                        </div>
                                                                     </div>
+                                                                <?php } ?>
+                                                                <div class="form-group" style="display: none;">
+                                                                    <label for="tipo">Tipo</label>
+                                                                    <select class="form-control" id="tipo1" name="tipo1">
+                                                                        <?php 
+                                                                            if ($usuario['Admin'] == 2){
+                                                                                echo '
+                                                                                    <option value="cliente">Cliente</option>
+                                                                                    <option value="admin">Admin</option>
+                                                                                    <option value="gerente" selected>Gerente</option>
+                                                                                ';
+                                                                            }elseif ($usuario['Admin'] == 1){
+                                                                                echo '
+                                                                                    <option value="cliente">Cliente</option>
+                                                                                    <option value="admin" selected>Admin</option>
+                                                                                    <option value="gerente">Gerente</option>
+                                                                                ';
+                                                                            }else{
+                                                                                echo '
+                                                                                    <option value="cliente" selected>Cliente</option>
+                                                                                    <option value="admin">Admin</option>
+                                                                                    <option value="gerente">Gerente</option>
+                                                                                ';
+                                                                            }
+                                                                        ?>
+                                                                    </select>
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <!-- <div class="form-group" style="display: none;">
                                                                     <label for="admin">Admin</label>
                                                                     <input type="checkbox" class="form-control" name="admin" id="admin" <?= $usuario['Admin'] ? 'checked' : '' ?>>
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button class="btn btn-secondary" type="button" onclick="$('#updateForm')[0].reset(); $('[id$=\'-error\']').hide();$('.is-invalid').removeClass('is-invalid');" data-dismiss="modal">Cancelar</button>
@@ -356,14 +390,14 @@
                             <option value="otro">Otro</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="domi">
                         <label for="domicilio">Domicilio</label>
                         <input type="text" class="form-control" name="domicilio" id="domicilio1">
                         <div class="invalid-feedback" style="display: none;" id="domicilio-error1">
                             El domicilio está mal introducido.
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="fnac">
                         <label for="nacimiento">Fecha Nacimiento</label>
                         <input type="date" class="form-control" name="nacimiento" id="nacimiento1">
                         <div class="invalid-feedback" style="display: none;" id="nacimiento-error1">
@@ -371,9 +405,18 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="tipo">Tipo</label>
+                        <select class="form-control" id="tipo" name="tipo">
+                            <option value="">Seleccione una opción</option>
+                            <option value="cliente" selected>Cliente</option>
+                            <option value="admin">Admin</option>
+                            <option value="gerente">Gerente</option>
+                        </select>
+                    </div>
+                    <!-- <div class="form-group">
                         <label for="admin">Admin</label>
                         <input type="checkbox" class="form-control" name="admin" id="admin1">
-                    </div>
+                    </div> -->
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" onclick="$('#insertForm')[0].reset(); $('[id$=\'-error1\']').hide();$('.is-invalid').removeClass('is-invalid');" data-dismiss="modal">Cancelar</button>
@@ -402,6 +445,30 @@
 
     <script>
         $(document).ready(function() {
+            $('#tipo').on('change', function() {
+                if ($(this).val() === 'cliente' || $(this).val() === 'gerente') {
+                    $('#fnac').show();
+                } else {
+                    $('#fnac').hide();
+                }
+                if ($(this).val() === 'cliente') {
+                    $('#domi').show();
+                } else {
+                    $('#domi').hide();
+                }
+            });
+            $('#tipo1').on('change', function() {
+                if ($(this).val() === 'cliente' || $(this).val() === 'gerente') {
+                    $('#fnac').show();
+                } else {
+                    $('#fnac').hide();
+                }
+                if ($(this).val() === 'cliente') {
+                    $('#domi').show();
+                } else {
+                    $('#domi').hide();
+                }
+            });
             $(document).on("submit", "#insertForm", function(event) {
             event.preventDefault(); // Evita que se envíe el form automáticamente
             let error = 0;
@@ -414,7 +481,7 @@
             const sexo = $(this).find("#sexo1").val().trim();
             const domicilio = $(this).find("#domicilio1").val().trim();
             const fnac = $(this).find("#nacimiento1").val().trim();
-            let admin = $(this).find("#admin1").is(":checked");
+            let admin = $(this).find("#tipo").val().trim();
 
             const nombrePattern = /^[a-zA-Z0-9\s]{1,100}$/;
             if (!nombrePattern.test(nombre)) {
@@ -462,12 +529,14 @@
             }
 
             const domicilioPattern = /^[a-zA-Z0-9º\s]{1,50}$/;
-            if (!domicilioPattern.test(domicilio)) {
-                $(this).find("#domicilio-error1").show();
-                $('#domicilio1').addClass('is-invalid');
-                error = 1;
-            }else{
-                $(this).find("#domicilio-error1").hide();
+            if (admin == "cliente") {
+                if (!domicilioPattern.test(domicilio)) {
+                    $(this).find("#domicilio-error1").show();
+                    $('#domicilio1').addClass('is-invalid');
+                    error = 1;
+                }else{
+                    $(this).find("#domicilio-error1").hide();
+                }
             }
 
             const nacimiento = new Date(fnac);
@@ -477,23 +546,27 @@
             if (!cumpleEsteAno) edad--;
             const esMenor = edad < 18;
 
-            if (fnac != "") {
-                if (esMenor) {
-                    $(this).find("#nacimiento-error1").text("No puedes crear una cuenta para un menor de edad")
+            if (admin == "cliente" || admin == "gerente") {
+                if (fnac != "") {
+                    if (esMenor) {
+                        $(this).find("#nacimiento-error1").text("No puedes crear una cuenta para un menor de edad")
+                        $(this).find("#nacimiento-error1").show();
+                        $('#nacimiento1').addClass('is-invalid');
+                        error = 1;
+                    }else{
+                        $(this).find("#nacimiento-error1").hide();
+                    }
+                }else{
                     $(this).find("#nacimiento-error1").show();
                     $('#nacimiento1').addClass('is-invalid');
                     error = 1;
-                }else{
-                    $(this).find("#nacimiento-error1").hide();
                 }
-            }else{
-                $(this).find("#nacimiento-error1").show();
-                $('#nacimiento1').addClass('is-invalid');
-                error = 1;
             }
 
-            if(admin){
+            if(admin == "admin"){
                 admin = 1;
+            }else if(admin == "gerente"){
+                admin = 2;
             }else{
                 admin = 0;
             }
@@ -565,9 +638,9 @@
             const contraseña = $(this).find("#passwd").val().trim();
             const dni = $(this).find("#dni").val().trim();
             const sexo = $(this).find("#sexo").val().trim();
-            const domicilio = $(this).find("#domicilio").val().trim();
-            const fnac = $(this).find("#nacimiento").val().trim();
-            let admin = $(this).find("#admin").is(":checked");
+            const domicilio = $(this).find("#domicilio").val()?.trim() || 0;
+            const fnac = $(this).find("#nacimiento").val()?.trim() || 0;
+            let admin = $(this).find("#tipo1").val().trim();
 
             const nombrePattern = /^[a-zA-Z0-9\s]{1,100}$/;
             if (!nombrePattern.test(nombre)) {
@@ -614,44 +687,49 @@
                 $(this).find("#dni-error").hide();
             }
 
-            const domicilioPattern = /^[a-zA-Z0-9º\s]{1,50}$/;
-            if (!domicilioPattern.test(domicilio)) {
-                $(this).find("#domicilio-error").show();
-                $('#domicilio').addClass('is-invalid');
-                error = 1;
-            }else{
-                $(this).find("#domicilio-error").hide();
+            if (admin == "cliente") {
+                const domicilioPattern = /^[a-zA-Z0-9º\s]{1,50}$/;
+                if (!domicilioPattern.test(domicilio)) {
+                    $(this).find("#domicilio-error").show();
+                    $('#domicilio').addClass('is-invalid');
+                    error = 1;
+                }else{
+                    $(this).find("#domicilio-error").hide();
+                }
             }
 
-            const nacimiento = new Date(fnac);
-            const hoy = new Date();
-            let edad = hoy.getFullYear() - nacimiento.getFullYear();
-            const cumpleEsteAno = hoy.getMonth() > nacimiento.getMonth() || (hoy.getMonth() === nacimiento.getMonth() && hoy.getDate() >= nacimiento.getDate());
-            if (!cumpleEsteAno) edad--;
-            const esMenor = edad < 18;
+            if (admin == "cliente" || admin == "gerente") {
+                const nacimiento = new Date(fnac);
+                const hoy = new Date();
+                let edad = hoy.getFullYear() - nacimiento.getFullYear();
+                const cumpleEsteAno = hoy.getMonth() > nacimiento.getMonth() || (hoy.getMonth() === nacimiento.getMonth() && hoy.getDate() >= nacimiento.getDate());
+                if (!cumpleEsteAno) edad--;
+                const esMenor = edad < 18;
 
-            if (fnac != "") {
-                if (esMenor) {
-                    $(this).find("#nacimiento-error").text("No puedes crear una cuenta para un menor de edad")
+                if (fnac != "") {
+                    if (esMenor) {
+                        $(this).find("#nacimiento-error").text("No puedes crear una cuenta para un menor de edad")
+                        $(this).find("#nacimiento-error").show();
+                        $('#nacimiento').addClass('is-invalid');
+                        error = 1;
+                    }else{
+                        $(this).find("#nacimiento-error").hide();
+                        $('#nacimiento').removeClass('is-invalid');
+                    }
+                }else{
                     $(this).find("#nacimiento-error").show();
                     $('#nacimiento').addClass('is-invalid');
                     error = 1;
-                }else{
-                    $(this).find("#nacimiento-error").hide();
-                    $('#nacimiento').removeClass('is-invalid');
                 }
-            }else{
-                $(this).find("#nacimiento-error").show();
-                $('#nacimiento').addClass('is-invalid');
-                error = 1;
             }
 
-            if(admin){
+            if(admin == "admin"){
                 admin = 1;
+            }else if(admin == "gerente"){
+                admin = 2;
             }else{
                 admin = 0;
             }
-
             if (error == 0) {
                 $.ajax({
                     url: '/Proyecto/userController',

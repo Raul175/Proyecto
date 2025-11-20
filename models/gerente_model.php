@@ -8,8 +8,13 @@ class gerente extends users {
     }
 
     public static function createGerente($id, $fNacimiento){
-        $stmt = DataBase::connect()->prepare("INSERT INTO Gerente (IdUsuario, FNacimiento) VALUES (?, ?)");
-        $stmt->execute([$id, $fNacimiento]);
+        try {
+            $stmt = DataBase::connect()->prepare("INSERT INTO Gerente (IdUsuario, FNacimiento) VALUES (?, ?)");
+            $stmt->execute([$id, $fNacimiento]);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     public static function updateGerente($id, $fNacimiento){

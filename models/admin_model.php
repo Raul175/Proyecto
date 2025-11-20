@@ -6,14 +6,19 @@ class admin extends users {
     }
 
     public static function createAdmin($id){
-        $stmt = DataBase::connect()->prepare("INSERT INTO Admin (IdUsuario) VALUES (?)");
-        $stmt->execute([$id]);
+        try {
+            $stmt = DataBase::connect()->prepare("INSERT INTO Admin (IdUsuario) VALUES (?)");
+            $stmt->execute([$id]);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     public static function createUser($nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin = 0){
         try {
             $conn = DataBase::connect();
-            $stmt = $conn->prepare("INSERT INTO Usuario (Nombre, Apellidos, Correo, Contrasena, DNI, Sexo, Admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO Usuario (Nombre, Apellidos, Correo, Contrasena, DNI, Sexo, Admin) VALUES (?, ?, ?, ?, ?, ?, ?)");
             $stmt->execute([$nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin]);
             $id = $conn->lastInsertId();
             return (int) trim($id);
