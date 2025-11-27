@@ -15,6 +15,10 @@
     if (empty($comentarios)){
         $comentarios = [];
     }
+
+    if (isset($_SESSION['admin'])) {
+        echo $_SESSION['admin'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,7 +130,7 @@
                                     </div>
                                     <div class="p-4 mt-2">
                                         <div class="d-flex justify-content-between mb-3">
-                                            <h5 class="mb-0"><?= $habitacion['Nombre'] ?><?= empty($habitacion['Tipo']) ? "" : " - ". $habitacion['Tipo'] ?></h5>
+                                            <h5 class="mb-0"><?= $habitacion['Nombre'] ?></h5>
                                             <div class="ps-2">
                                                 <?php for($i = 0; $i < $habitacion['NEstrellas']; $i++): ?>
                                                     <small class="fas fa-star text-primary"></small> <!-- Estrella rellena -->
@@ -304,7 +308,6 @@
                         login : 1
                     },
                     success: function(response) {
-                        alert(response);
                         if (response == 1) {
                             window.location.href = "/Proyecto/admin";
                         } else if (response == 2) {
@@ -338,7 +341,30 @@
             const dni = $(this).find("#dni1").val().trim();
             const sexo = $(this).find("#sexo1").val().trim();
             const domicilio = $(this).find("#domicilio1").val().trim();
-            let admin = $(this).find("#admin1").is(":checked");
+            let admin = 0;
+            const fnac = $(this).find("#nacimiento1").val().trim();
+
+            const nacimiento = new Date(fnac);
+            const hoy = new Date();
+            let edad = hoy.getFullYear() - nacimiento.getFullYear();
+            const cumpleEsteAno = hoy.getMonth() > nacimiento.getMonth() || (hoy.getMonth() === nacimiento.getMonth() && hoy.getDate() >= nacimiento.getDate());
+            if (!cumpleEsteAno) edad--;
+            const esMenor = edad < 18;
+
+            if (fnac != "") {
+                if (esMenor) {
+                    $(this).find("#nacimiento-error1").text("No puedes crear una cuenta para un menor de edad")
+                    $(this).find("#nacimiento-error1").show();
+                    $('#nacimiento1').addClass('is-invalid');
+                    error = 1;
+                }else{
+                    $(this).find("#nacimiento-error1").hide();
+                }
+            }else{
+                $(this).find("#nacimiento-error1").show();
+                $('#nacimiento1').addClass('is-invalid');
+                error = 1;
+            }
 
             const nombrePattern = /^[a-zA-Z0-9\s]{1,100}$/;
             if (!nombrePattern.test(nombre)) {
@@ -393,8 +419,8 @@
             }else{
                 $(this).find("#domicilio-error1").hide();
             }
-
             if (error == 0) {
+                
                 $.ajax({
                     url: '/Proyecto/userController',
                     type: 'POST',
@@ -407,6 +433,7 @@
                         dni : dni,
                         sexo : sexo,
                         domicilio : domicilio,
+                        nacimiento : fnac,
                         admin : admin,
                         insertar : 1
                     },

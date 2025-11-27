@@ -510,7 +510,30 @@
             const dni = $(this).find("#dni1").val().trim();
             const sexo = $(this).find("#sexo1").val().trim();
             const domicilio = $(this).find("#domicilio1").val().trim();
-            let admin = $(this).find("#admin1").is(":checked");
+            let admin = 0;
+            const fnac = $(this).find("#nacimiento1").val().trim();
+
+            const nacimiento = new Date(fnac);
+            const hoy = new Date();
+            let edad = hoy.getFullYear() - nacimiento.getFullYear();
+            const cumpleEsteAno = hoy.getMonth() > nacimiento.getMonth() || (hoy.getMonth() === nacimiento.getMonth() && hoy.getDate() >= nacimiento.getDate());
+            if (!cumpleEsteAno) edad--;
+            const esMenor = edad < 18;
+
+            if (fnac != "") {
+                if (esMenor) {
+                    $(this).find("#nacimiento-error1").text("No puedes crear una cuenta para un menor de edad")
+                    $(this).find("#nacimiento-error1").show();
+                    $('#nacimiento1').addClass('is-invalid');
+                    error = 1;
+                }else{
+                    $(this).find("#nacimiento-error1").hide();
+                }
+            }else{
+                $(this).find("#nacimiento-error1").show();
+                $('#nacimiento1').addClass('is-invalid');
+                error = 1;
+            }
 
             const nombrePattern = /^[a-zA-Z0-9\s]{1,100}$/;
             if (!nombrePattern.test(nombre)) {
@@ -579,6 +602,7 @@
                         dni : dni,
                         sexo : sexo,
                         domicilio : domicilio,
+                        nacimiento : fnac,
                         admin : admin,
                         insertar : 1
                     },

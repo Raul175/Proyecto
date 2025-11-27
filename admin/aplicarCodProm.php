@@ -426,7 +426,7 @@
 
             if (error == 0) {
                 $.ajax({
-                    url: '/Proyecto/aplicaCodPromController',
+                    url: '/Proyecto/codPromController',
                     type: 'POST',
                     data: {
                         codigo : codigo,

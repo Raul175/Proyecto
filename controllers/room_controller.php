@@ -133,6 +133,7 @@
         $rooms = Habitacion::selectAllRoomsFechaLimite();
         if ($rooms != false) {
             foreach ($rooms as &$room) {
+                $room['hotel_ubi'] = Hotel::selectHotel($room['FK_IdHotel'])['Ubicacion'];
                 $room['FK_IdHotel'] = Hotel::selectHotel($room['FK_IdHotel'])['Nombre'];
                 $room['suite'] = Suite::selectSuite($room['IdHabitacion']);
                 $room['camas'] = selectAllCamaRoom($room['IdHabitacion']);

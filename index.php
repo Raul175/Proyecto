@@ -23,11 +23,11 @@
 
     //Rutas a las views del admin
     $router->get("/admin", function(){ 
-        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
+        //if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
             include "admin/admin.php";unset($_SESSION['habitaciones']); 
-        }else{
-            header("Location: /Proyecto");
-        }
+        //}else{
+        //    header("Location: /Proyecto");
+        //}
     });
     $router->get("/admin/habitaciones", function(){ 
         if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
@@ -160,14 +160,14 @@
 
     //Controladores
     $router->match("GET|POST", "/userController", function(){ require_once("controllers/users_controller.php"); });
+    $router->match("GET|POST", "/clientController", function(){ require_once("controllers/client_controller.php"); });
+    $router->match("GET|POST", "/adminController", function(){ require_once("controllers/admin_controller.php"); });
+    $router->match("GET|POST", "/gerenteController", function(){ require_once("controllers/gerente_controller.php"); });
     $router->match("GET|POST", "/dbController", function(){ require_once("controllers/db_controller.php"); });
     $router->match("GET|POST", "/roomController", function(){ require_once("controllers/room_controller.php"); });
     $router->match("GET|POST", "/hotelController", function(){ require_once("controllers/hotel_controller.php"); });
     $router->match("GET|POST", "/localidadController", function(){ require_once("controllers/localidad_controller.php"); });
     $router->match("GET|POST", "/codPromController", function(){ require_once("controllers/codProm_controller.php"); });
-    $router->match("GET|POST", "/aplicaCodPromController", function(){ require_once("controllers/aplicaCodProm_controller.php"); });
-    $router->match("GET|POST", "/aplicaCamaController", function(){ require_once("controllers/aplicaCama_controller.php"); });
-    $router->match("GET|POST", "/aplicaComplementoController", function(){ require_once("controllers/aplicaComplemento_controller.php"); });
     $router->match("GET|POST", "/reservaController", function(){ require_once("controllers/reserva_controller.php"); });
     $router->match("GET|POST", "/facturaController", function(){ require_once("controllers/factura_controller.php"); });
     $router->match("GET|POST", "/camaController", function(){ require_once("controllers/cama_controller.php"); });
@@ -176,6 +176,9 @@
 
     //Modelos
     $router->match("GET|POST", "/userModel", function(){ require_once("models/users_model.php"); });
+    $router->match("GET|POST", "/clientModel", function(){ require_once("models/client_model.php"); });
+    $router->match("GET|POST", "/adminModel", function(){ require_once("models/admin_model.php"); });
+    $router->match("GET|POST", "/gerenteModel", function(){ require_once("models/gerente_model.php"); });
     $router->match("GET|POST", "/dbModel", function(){ require_once("models/db_model.php"); });
     $router->match("GET|POST", "/roomModel", function(){ require_once("models/room_model.php"); });
     $router->match("GET|POST", "/hotelModel", function(){ require_once("models/hotel_model.php"); });

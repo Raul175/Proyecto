@@ -53,15 +53,15 @@ INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Zamora', '49000');
 INSERT INTO Localidad (Nombre, CodigoPostal) VALUES ('Zaragoza', '50000');
 
 -- Usuarios
--- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('admin123', 'admin admin', 'admin@rolvahotels.com', SHA2('admin@3000', 256), '29292929W', 'hombre', 1);
--- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('raul', 'gonzalez alvarez', 'raul@rolvahotels.com', SHA2('raul$123', 256), '29292921J', 'hombre', 1);
--- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('gerente123', 'gerente gerente', 'gerente@rolvahotels.com', SHA2('gerente$123', 256), '29292921J', 'hombre', 2);
--- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Carlos', 'Gomez Perez', 'carlos.gomez@gmail.com', SHA2('carlos123', 256), '12345678A', 'hombre', 0);
--- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Lucia', 'Martínez Ruiz', 'lucia.martinez@gmail.com', SHA2('lucia123', 256), '87654321B', 'mujer', 0);
--- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Juan', 'Perez Garcia', 'juan.perez@gmail.com', SHA2('pass123', 256), '12345678A', 'hombre', 0);
--- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Ana', 'Lopez Martin', 'ana.lopez@gmail.com', SHA2('pass123', 256), '87654321B', 'mujer', 0);
--- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Carlos', 'Sánchez Ruiz', 'carlos.sanchez@gmail.com', SHA2('pass123', 256), '11223344C', 'hombre', 0);
--- INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('pepe', 'pepito pepito', 'pepito123@gmail.com', SHA2('pepito_1', 256), '11222344C', 'hombre', 2);
+INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('admin123', 'admin admin', 'admin@rolvahotels.com', SHA2('admin@3000', 256), '29292929W', 'hombre', 1);
+INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('raul', 'gonzalez alvarez', 'raul@rolvahotels.com', SHA2('raul$123', 256), '29292921J', 'hombre', 1);
+INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('gerente123', 'gerente gerente', 'gerente@rolvahotels.com', SHA2('gerente$123', 256), '29292921J', 'hombre', 2);
+INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Carlos', 'Gomez Perez', 'carlos.gomez@gmail.com', SHA2('carlos123', 256), '12345678A', 'hombre', 0);
+INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Lucia', 'Martínez Ruiz', 'lucia.martinez@gmail.com', SHA2('lucia123', 256), '87654321B', 'mujer', 0);
+INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Juan', 'Perez Garcia', 'juan.perez@gmail.com', SHA2('pass123', 256), '12345678A', 'hombre', 0);
+INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Ana', 'Lopez Martin', 'ana.lopez@gmail.com', SHA2('pass123', 256), '87654321B', 'mujer', 0);
+INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('Carlos', 'Sánchez Ruiz', 'carlos.sanchez@gmail.com', SHA2('pass123', 256), '11223344C', 'hombre', 0);
+INSERT INTO Usuario (nombre, apellidos, correo, contrasena, dni, sexo, admin) VALUES ('pepe', 'pepito pepito', 'pepito123@gmail.com', SHA2('pepito_1', 256), '11222344C', 'hombre', 2);
 -- Clientes
 INSERT INTO Cliente (idUsuario, domicilio, FNacimiento) VALUES (4, 'Calle Mayor 12', '1990-05-10');
 INSERT INTO Cliente (idUsuario, domicilio, FNacimiento) VALUES (5, 'Avda. Andalucía 34', '1995-08-15');

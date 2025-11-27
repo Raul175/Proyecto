@@ -579,7 +579,7 @@
         });
             $(document).on("submit", "#deleteForm", function(event) {
                 event.preventDefault();
-                id = document.getElementById("idHab").value.trim();
+                id = $(this).find("#idHab").val();
                 $.ajax({
                     url: '/Proyecto/roomController',
                     type: 'POST',

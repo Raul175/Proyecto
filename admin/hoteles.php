@@ -12,10 +12,9 @@
         $localidades = [];
     }
     $gerentes = selectAllUsersGerente();
-    if (empty($usuarios)) {
-        $usuarios = [];
-    }
-    
+    if (empty($gerentes)) {
+        $gerentes = [];
+    } 
 ?>
 <!DOCTYPE html>
 <html lang="en">

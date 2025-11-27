@@ -167,6 +167,13 @@
                             El domicilio está mal introducido.
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="nacimiento">Fecha Nacimiento</label>
+                        <input type="date" class="form-control" name="nacimiento" value="<?= $usuario['FNacimiento'] ?>" id="nacimiento1">
+                        <div class="invalid-feedback" style="display: none;" id="nacimiento-error">
+                            Introduce la fecha de nacimiento.
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-personalizado2">Registrarse</button>
                     <a href="#" data-bs-dismiss="modal" onclick="$('#registerForm')[0].reset(); $('[id$=\'-error\']').hide();$('.is-invalid').removeClass('is-invalid');" data-bs-toggle="modal" data-bs-target="#InicioSesionModal">Ya tienes una cuenta registrada?</a>
                 </form>
