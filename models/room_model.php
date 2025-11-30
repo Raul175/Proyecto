@@ -88,7 +88,7 @@ class Habitacion {
     public static function selectAllRoomsGerente($id){
         try {
             $stmt = DataBase::connect()->prepare("
-            SELECT * FROM Habitacion h
+            SELECT h.* FROM Habitacion h
             JOIN Hotel ho ON h.FK_IdHotel = ho.IdHotel
             WHERE ho.FK_IdUsuario LIKE ?
             ");

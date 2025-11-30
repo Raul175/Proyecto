@@ -23,11 +23,11 @@
 
     //Rutas a las views del admin
     $router->get("/admin", function(){ 
-        //if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
             include "admin/admin.php";unset($_SESSION['habitaciones']); 
-        //}else{
-        //    header("Location: /Proyecto");
-        //}
+        }else{
+           header("Location: /Proyecto");
+        }
     });
     $router->get("/admin/habitaciones", function(){ 
         if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
@@ -179,7 +179,7 @@
     $router->match("GET|POST", "/clientModel", function(){ require_once("models/client_model.php"); });
     $router->match("GET|POST", "/adminModel", function(){ require_once("models/admin_model.php"); });
     $router->match("GET|POST", "/gerenteModel", function(){ require_once("models/gerente_model.php"); });
-    $router->match("GET|POST", "/dbModel", function(){ require_once("models/db_model.php"); });
+    $router->match("GET|POST", "/dbModel", function(){ require_once("database/db.php"); });
     $router->match("GET|POST", "/roomModel", function(){ require_once("models/room_model.php"); });
     $router->match("GET|POST", "/hotelModel", function(){ require_once("models/hotel_model.php"); });
     $router->match("GET|POST", "/localidadModel", function(){ require_once("models/localidad_model.php"); });

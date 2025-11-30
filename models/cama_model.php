@@ -113,7 +113,7 @@ class Cama {
 
     public static function deleteAplica($habitacion, $cama){
         try {
-            $stmt = DataBase::connect()->prepare("DELETE FROM Tiene WHERE IdHabitacion LIKE ? AND IdCama LIKE ?");
+            $stmt = DataBase::connect()->prepare("DELETE FROM Tiene WHERE IdHabitacion LIKE ? AND IdCama LIKE ? LIMIT 1");
             $stmt->execute([$habitacion, $cama]);
             return true;
         } catch (PDOException $e) {

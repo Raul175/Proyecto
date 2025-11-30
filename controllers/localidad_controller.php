@@ -1,5 +1,5 @@
 <?php
-    require_once('models/db_model.php');
+    require_once('database/db.php');
     require_once('models/localidad_model.php');
 
     if(isset($_POST['insertar'])){

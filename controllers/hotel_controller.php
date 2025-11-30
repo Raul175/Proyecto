@@ -1,5 +1,5 @@
 <?php
-    require_once('models/db_model.php');
+    require_once('database/db.php');
     require_once('models/hotel_model.php');
     require_once('models/localidad_model.php');
 
@@ -79,6 +79,39 @@
     function selectAllHotelsLocal(){
         $hoteles = [];
         $datos = Hotel::selectAllHotelsLocal();
+        if (empty($datos)) {
+            return [];
+        }
+        foreach ($datos as $fila) {
+            $hotelId = $fila['hotel_IdHotel'];
+            $hoteles[$hotelId] = [
+                'id' => $fila['hotel_IdHotel'],
+                'nombre' => $fila['hotel_nombre'],
+                'ubicacion' => $fila['hotel_ubicacion'],
+                'idLocalidad' => $fila['hotel_FK_IdLocalidad'],
+                'localidad' => Localidad::selectLocalidad($fila['hotel_FK_IdLocalidad']),
+                'habitaciones' => []
+            ];
+
+            if ($fila['hab_IdHabitacion']) {
+                $hoteles[$hotelId]['habitaciones'][] = [
+                    'id' => $fila['hab_IdHabitacion'],
+                    'nombre' => $fila['hab_nombre'],
+                    'tipo' => $fila['hab_Tipo'],
+                    'precio' => $fila['hab_PrecioUnitario'],
+                    'm2' => $fila['hab_m2'],
+                    'imagen' => $fila['hab_Imagen'],
+                ];
+            }
+        }
+
+        $hoteles = array_values($hoteles);
+        return $hoteles;
+    }
+
+    function selectAllHotelsLocalGerente($id){
+        $hoteles = [];
+        $datos = Hotel::selectAllHotelsLocalGerente($id);
         if (empty($datos)) {
             return [];
         }

@@ -2,7 +2,10 @@
 class DataBase{
     public static function connect(){
         try {
-            $connect = new PDO("mysql:host=localhost;dbname=rolvaHotels", "root", "");
+            $options = array(
+                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+            );
+            $connect = new PDO("mysql:host=localhost;dbname=rolvahotels", "root", "", $options);
         } catch (\Throwable $th) {
             $connect = new PDO("mysql:host=localhost", "root", "");
         }
@@ -16,8 +19,8 @@ class DataBase{
         try {
             $connect->exec("CREATE DATABASE rolvaHotels");
             $connect = self::connect();
-            $rolvaHotelsDBSQL = file_get_contents("models/rolvaHotelsDBSQL.sql");
-            $datosBDSQL = file_get_contents("models/datosBDSQL.sql");
+            $rolvaHotelsDBSQL = file_get_contents("database/rolvaHotelsDBSQL.sql");
+            $datosBDSQL = file_get_contents("database/datosBDSQL.sql");
             $connect->exec($rolvaHotelsDBSQL);
             
             $connect = self::connect();

@@ -1,5 +1,4 @@
 <?php
-    require_once('controllers/aplicaCodProm_controller.php');
     require_once('controllers/codProm_controller.php');
     $codigos = selectAllCodProm();
     if (empty($codigos)) {
@@ -24,14 +23,14 @@
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/Proyecto/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/Proyecto/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/Proyecto/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
         .modal-header, .modal-body, .modal-footer{
             background-color: var(--segundo-primary);
@@ -507,10 +506,9 @@
                 hoy.setHours(0, 0, 0, 0);
                 fechaInicio.setHours(0, 0, 0, 0);
                 fechaFin.setHours(0, 0, 0, 0);
-                if (fechaInicio <= hoy) {
+                if (fechaInicio < hoy) {
                     $(this).find("#finicio-error").html('La fecha de inicio no puede ser menor a hoy.');
-                    $(this).find("#ffin-error").show();
-                    $(this).find("#ffin-error").show();
+                    $(this).find("#finicio-error").show();
                     error = 1;
                 }
 

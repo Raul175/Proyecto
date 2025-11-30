@@ -50,7 +50,7 @@
     --segundo-dark: #7C4F2F;   
     --segundo-light: #daa880;  
     --segundo-accent: #e7991b;; 
-    --color-letra: #FFB335;
+    --color-letra: #ffffff;
   }
 
 *,
@@ -92,33 +92,33 @@ body {
 
 #content{
     background-color: var(--segundo-light) !important;
-    color: var(--segundo-primary) !important;
+    color: var(--color-letra) !important;
     border-color: var(--color-letra) !important;
   }
 
 .sticky-footer, #navbar, #accordionSidebar{
     background-color: var(--segundo-primary) !important;
-    color: var(--primer-secondary) !important;
+    color: var(--color-letra) !important;
     border-color: var(--color-letra) !important;
 }
 
 .mostaza, .sidebar-brand-text{
-    color: var(--primer-secondary) !important;
+    color: var(--color-letra) !important;
     border-color: var(--color-letra);
 }
 
 #accordionSidebar i, #accordionSidebar span{
-    color: var(--primer-secondary) !important;
+    color: var(--color-letra) !important;
 }
 
 .card-body, .card-header, .table{
     background-color: var(--segundo-primary) !important;
-    color: var(--primer-secondary) !important;
+    color: var(--color-letra) !important;
     border-color: var(--color-letra) !important;
 }
 
 .card-header h6, .card-header i, #sidebarToggleTop{
-    color: var(--primer-secondary) !important;
+    color: var(--color-letra) !important;
 }
 
 .modal-header, .modal-body, .modal-footer{
@@ -167,6 +167,7 @@ table#miTabla {
 
 table#miTabla tr, table#miTabla td, table#miTabla th{
     border-color: var(--color-letra) !important;
+    color: var(--color-letra) !important;
 }
 
 /* Hover sobre botones */
@@ -179,7 +180,7 @@ table#miTabla tr, table#miTabla td, table#miTabla th{
 .page-item.active .page-link {
     background-color: var(--segundo-light) !important;
     border-color: var(--color-letra) !important;
-    color: var(--segundo-primary) !important;
+    color: var(---color-letra) !important;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -303,6 +304,10 @@ pre,
 samp {
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     font-size: 1em
+}
+
+.fas:hover{
+    color: var(--segundo-accent) !important;
 }
 
 pre {
@@ -11052,7 +11057,7 @@ a.text-dark:hover {
 
     .table td,
     .table th {
-        background-color: #fff !important
+        background-color: #fff !important;
     }
 
     .table-bordered td,

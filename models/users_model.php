@@ -75,7 +75,7 @@ LEFT JOIN Gerente G ON U.IdUsuario = G.IdUsuario;
 
         public static function selectUser($user,$password){
                 try {
-                        $stmt = DataBase::connect()->prepare("SELECT * FROM usuario WHERE correo LIKE ?");
+                        $stmt = DataBase::connect()->prepare("SELECT * FROM Usuario WHERE correo LIKE ?");
                         $stmt->execute([$user]);
                         $user = $stmt->fetch(PDO::FETCH_ASSOC);
                         return $user;
@@ -86,7 +86,7 @@ LEFT JOIN Gerente G ON U.IdUsuario = G.IdUsuario;
 
         public static function selectUserId($id){
                 $stmt = DataBase::connect()->prepare("SELECT u.*, c.* 
-                                                      FROM usuario u JOIN cliente c ON u.IdUsuario = c.IdUsuario
+                                                      FROM Usuario u JOIN cliente c ON u.IdUsuario = c.IdUsuario
                                                       WHERE u.IdUsuario LIKE ?");
                 $stmt->execute([$id]);
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);

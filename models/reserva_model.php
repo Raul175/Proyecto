@@ -91,7 +91,7 @@ class Reserva {
 
     public static function resolver($reserva){
         try {
-            $stmt = DataBase::connect()->prepare("UPDATE reserva SET Incidencia = null WHERE IdReserva LIKE ?");
+            $stmt = DataBase::connect()->prepare("UPDATE Reserva SET Incidencia = null WHERE IdReserva LIKE ?");
             $stmt->execute([$reserva]);
             return 1;
         } catch (PDOException $e) {

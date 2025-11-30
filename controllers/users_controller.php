@@ -1,5 +1,5 @@
 <?php
-    require_once('models/db_model.php');
+    require_once('database/db.php');
     require_once('models/users_model.php');
     require_once('models/client_model.php');
     require_once('models/admin_model.php');
@@ -153,7 +153,7 @@
     }
 
     function updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $domicilio, $nacimiento, $admin){
-        admin::updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin);
+        echo admin::updateUser($id, $nombre, $apellidos, $correo, $contraseña, $dni, $sexo, $admin);
         if ($admin == 0) {
             echo cliente::updateClient($id, $domicilio, $nacimiento);
         }elseif ($admin == 2) {

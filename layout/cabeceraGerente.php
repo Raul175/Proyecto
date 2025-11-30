@@ -21,29 +21,6 @@
         <!-- Divider -->
         <hr class="sidebar-divider">
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Operaciones
-        </div>
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <!-- <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Base de Datos</span>
-            </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Operaciones</h6>
-                    <a class="collapse-item" href="/Proyecto/gerente?createDB">Crear BD</a>
-                    <a class="collapse-item" href="/Proyecto/gerente?deleteDB">Borrar BD</a>
-                </div>
-            </div>
-        </li> -->
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
 
         <div class="sidebar-heading">
             Datos
@@ -71,7 +48,7 @@
             <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Datos</h6>
-                    <a class="collapse-item" href="/Proyecto/gerente/aplicarCodProm">Aplicar Código Promocional</a>
+                    <a class="collapse-item" href="/Proyecto/gerente/aplicarCodProm">Aplicar Cod Promocional</a>
                     <a class="collapse-item" href="/Proyecto/gerente/aplicarCama">Aplicar Cama</a>
                     <a class="collapse-item" href="/Proyecto/gerente/aplicarComplemento">Aplicar Complemento</a>
                 </div>

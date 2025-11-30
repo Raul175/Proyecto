@@ -38,8 +38,7 @@
             }
         }
     }
-    
-    $jsonHoteles = json_encode($datos);
+    $jsonHoteles = json_encode($datos, JSON_UNESCAPED_UNICODE); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -353,6 +352,7 @@
 <script>
     $(document).ready(function() {
         const hoteles = <?php echo $jsonHoteles; ?>;
+        console.log(hoteles);
         Highcharts.mapChart('mapa', {
         chart: {
             map: 'countries/es/es-all',

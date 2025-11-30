@@ -1,5 +1,5 @@
 <?php
-    require_once('models/db_model.php');
+    require_once('database/db.php');
 
     function createDB(){
         echo DataBase::createBD();

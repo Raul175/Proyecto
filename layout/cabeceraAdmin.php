@@ -57,14 +57,14 @@
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Datos</h6>
-                    <a class="collapse-item" href="/Proyecto/admin/habitaciones">Habitaciones</a>
-                    <a class="collapse-item" href="/Proyecto/admin/hoteles">Hoteles</a>
-                    <a class="collapse-item" href="/Proyecto/admin/localidades">Localidades</a>
-                    <a class="collapse-item" href="/Proyecto/admin/usuarios">Usuarios</a>
-                    <a class="collapse-item" href="/Proyecto/admin/codigos">Códigos Promocionales</a>
-                    <a class="collapse-item" href="/Proyecto/admin/camas">Camas</a>
-                    <a class="collapse-item" href="/Proyecto/admin/complementos">Complementos</a>
-                    <a class="collapse-item" href="/Proyecto/admin/facturas">Facturas</a>
+                    <a class="collapse-item" style="color: black;" href="/Proyecto/admin/habitaciones">Habitaciones</a>
+                    <a class="collapse-item" style="color: black;" href="/Proyecto/admin/hoteles">Hoteles</a>
+                    <a class="collapse-item" style="color: black;" href="/Proyecto/admin/localidades">Localidades</a>
+                    <a class="collapse-item" style="color: black;" href="/Proyecto/admin/usuarios">Usuarios</a>
+                    <a class="collapse-item" style="color: black;" href="/Proyecto/admin/codigos">Códigos Promocionales</a>
+                    <a class="collapse-item" style="color: black;" href="/Proyecto/admin/camas">Camas</a>
+                    <a class="collapse-item" style="color: black;" href="/Proyecto/admin/complementos">Complementos</a>
+                    <a class="collapse-item" style="color: black;" href="/Proyecto/admin/facturas">Facturas</a>
                 </div>
             </div>
         </li>
@@ -77,9 +77,9 @@
             <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Datos</h6>
-                    <a class="collapse-item" href="/Proyecto/admin/aplicarCodProm">Aplicar Código Promocional</a>
-                    <a class="collapse-item" href="/Proyecto/admin/aplicarCama">Aplicar Cama</a>
-                    <a class="collapse-item" href="/Proyecto/admin/aplicarComplemento">Aplicar Complemento</a>
+                    <a class="collapse-item" style="color: black;" href="/Proyecto/admin/aplicarCodProm">Aplicar Cod Promocional</a>
+                    <a class="collapse-item" style="color: black;" href="/Proyecto/admin/aplicarCama">Aplicar Cama</a>
+                    <a class="collapse-item" style="color: black;" href="/Proyecto/admin/aplicarComplemento">Aplicar Complemento</a>
                 </div>
             </div>
         </li>

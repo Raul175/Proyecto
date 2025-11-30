@@ -506,22 +506,21 @@
                 hoy.setHours(0, 0, 0, 0);
                 fechaInicio.setHours(0, 0, 0, 0);
                 fechaFin.setHours(0, 0, 0, 0);
-                if (fechaInicio <= hoy) {
+                if (fechaInicio < hoy) {
                     $(this).find("#finicio-error").html('La fecha de inicio no puede ser menor a hoy.');
-                    $(this).find("#ffin-error").show();
-                    $(this).find("#ffin-error").show();
+                    $(this).find("#finicio-error").show();
                     error = 1;
                 }
 
                 if (fechaInicio > fechaFin) {
-                $(this).find("#finicio-error").html('La fecha de inicio no puede ser posterior a la de fin.');
-                $(this).find("#finicio-error").show();
-                $('#finicio').addClass('is-invalid');
-                $(this).find("#ffin-error").html('La fecha de inicio no puede ser posterior a la de fin.');
-                $(this).find("#ffin-error").show();
-                $('#ffin').addClass('is-invalid');
-                error = 1;
-            }
+                    $(this).find("#finicio-error").html('La fecha de inicio no puede ser posterior a la de fin.');
+                    $(this).find("#finicio-error").show();
+                    $('#finicio').addClass('is-invalid');
+                    $(this).find("#ffin-error").html('La fecha de inicio no puede ser posterior a la de fin.');
+                    $(this).find("#ffin-error").show();
+                    $('#ffin').addClass('is-invalid');
+                    error = 1;
+                }
 
                 if (error == 0) {
                     $.ajax({

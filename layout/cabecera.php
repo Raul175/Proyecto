@@ -101,7 +101,8 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-personalizado2">Iniciar Sesión</button>
-                    <a href="#" onclick="$('#loginForm')[0].reset(); $('[id$=\'-error\']').hide();$('.is-invalid').removeClass('is-invalid');" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#registroModal">No tienes una cuenta registrada?</a>
+                    <a href="#" style="color: white;" onclick="$('#loginForm')[0].reset(); $('[id$=\'-error\']').hide();$('.is-invalid').removeClass('is-invalid');" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#registroModal">No tienes una cuenta registrada?</a>
+                    <a href="#" style="color: white;" onclick="$('#loginForm')[0].reset(); $('[id$=\'-error\']').hide();$('.is-invalid').removeClass('is-invalid');" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#registroGModal">Quieres ser un gerente?</a>
                 </form>
             </div>
         </div>
@@ -176,6 +177,73 @@
                     </div>
                     <button type="submit" class="btn btn-personalizado2">Registrarse</button>
                     <a href="#" data-bs-dismiss="modal" onclick="$('#registerForm')[0].reset(); $('[id$=\'-error\']').hide();$('.is-invalid').removeClass('is-invalid');" data-bs-toggle="modal" data-bs-target="#InicioSesionModal">Ya tienes una cuenta registrada?</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="registroGModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Registrarse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="error-message1" class="alert alert-danger" style="display: none;"></div>
+                <form id="registerGForm" action="../index.php" method="post">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="nombreG">
+                        <div class="invalid-feedback" style="display: none;" id="nombre-errorG">
+                            El nombre es inválido o demasiado largo (máx. 100 caracteres).
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" class="form-control" name="apellidos" id="apellidosG">
+                        <div class="invalid-feedback" style="display: none;" id="apellidos-errorG">
+                            Los apellidos son inválidos o demasiado largos (máx. 100 caracteres).
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="correo">Correo</label>
+                        <input type="text" class="form-control" name="correo" id="correoG">
+                        <div class="invalid-feedback" style="display: none;" id="correo-errorG">
+                            El correo está mal introducido (ejemplo@gmail.com).
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwd">Contraseña</label>
+                        <input type="password" class="form-control" name="passwd" id="passwdG">
+                        <div class="invalid-feedback" style="display: none;" id="passwd-errorG">
+                            La contraseña esta mal introducida.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dni">DNI</label>
+                        <input type="dni" class="form-control" name="dni" id="dniG">
+                        <div class="invalid-feedback" style="display: none;" id="dni-errorG">
+                            El DNI está mal introducido (99999999J)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sexo">Sexo</label>
+                        <select class="form-control" id="sexoG" name="sexo">
+                            <option value="hombre">Hombre</option>
+                            <option value="mujer">Mujer</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nacimiento">Fecha Nacimiento</label>
+                        <input type="date" class="form-control" name="nacimiento" value="<?= $usuario['FNacimiento'] ?>" id="nacimientoG">
+                        <div class="invalid-feedback" style="display: none;" id="nacimiento-errorG">
+                            Introduce la fecha de nacimiento.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-personalizado2">Registrarse</button>
+                    <a href="#" style="color: white;" data-bs-dismiss="modal" onclick="$('#registerGForm')[0].reset(); $('[id$=\'-error\']').hide();$('.is-invalid').removeClass('is-invalid');" data-bs-toggle="modal" data-bs-target="#InicioSesionModal">Ya tienes una cuenta registrada?</a>
                 </form>
             </div>
         </div>

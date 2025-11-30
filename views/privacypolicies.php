@@ -348,8 +348,8 @@
                     },
                     success: function(response) {
                         if(response){
+                            alert("Te has registrado");
                             window.location.href = "/Proyecto/";
-                            alert("Te has registrado correctamente");
                         }else{
                             $("#error-message1").html(response);
                             $("#error-message1").show();
@@ -461,6 +461,122 @@
                     console.log(response);
                 }
             });
+        });
+        $("#registerGForm").submit(function(event) {
+            event.preventDefault(); // Evita que se envíe el form automáticamente
+
+            let error = 0;
+
+            const nombre = $(this).find("#nombreG").val().trim();
+            const apellidos = $(this).find("#apellidosG").val().trim();
+            const correo = $(this).find("#correoG").val().trim();
+            const contraseña = $(this).find("#passwdG").val().trim();
+            const dni = $(this).find("#dniG").val().trim();
+            const sexo = $(this).find("#sexoG").val().trim();
+            let admin = 2;
+            const fnac = $(this).find("#nacimientoG").val().trim();
+
+            const nacimiento = new Date(fnac);
+            const hoy = new Date();
+            let edad = hoy.getFullYear() - nacimiento.getFullYear();
+            const cumpleEsteAno = hoy.getMonth() > nacimiento.getMonth() || (hoy.getMonth() === nacimiento.getMonth() && hoy.getDate() >= nacimiento.getDate());
+            if (!cumpleEsteAno) edad--;
+            const esMenor = edad < 18;
+
+            if (fnac != "") {
+                if (esMenor) {
+                    $(this).find("#nacimiento-errorG").text("No puedes crear una cuenta para un menor de edad")
+                    $(this).find("#nacimiento-errorG").show();
+                    $('#nacimiento1').addClass('is-invalid');
+                    error = 1;
+                }else{
+                    $(this).find("#nacimiento-errorG").hide();
+                }
+            }else{
+                $(this).find("#nacimiento-errorG").show();
+                $('#nacimientoG').addClass('is-invalid');
+                error = 1;
+            }
+
+            const nombrePattern = /^[a-zA-Z0-9\s]{1,100}$/;
+            if (!nombrePattern.test(nombre)) {
+                $(this).find("#nombre-errorG").show();
+                $('#nombreG').addClass('is-invalid');
+                error = 1;
+            }else{
+                $(this).find("#nombre-errorG").hide();
+            }
+
+            const apellidosPattern = /^[A-Za-z\s]{1,100}$/;
+            if (!apellidosPattern.test(apellidos)) {
+                $(this).find("#apellidos-errorG").show();
+                $('#apellidosG').addClass('is-invalid');
+                error = 1;
+            }else{
+                $(this).find("#apellidos-errorG").hide();
+            }
+
+            const correoPattern = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!correoPattern.test(correo)) {
+                $(this).find("#correo-errorG").show();
+                $('#correoG').addClass('is-invalid');
+                error = 1;
+            }else{
+                $(this).find("#correo-errorG").hide();
+            }
+
+            const passwordPattern = /^[A-Za-z\d@$!%*#?&_-]{6,}$/;
+            if (!passwordPattern.test(contraseña)) {
+                $(this).find("#passwd-errorG").show(); 
+                $('#passwdG').addClass('is-invalid');
+                error = 1;
+            }else{
+                $(this).find("#passwd-errorG").hide();
+            }
+
+            const dniPattern = /^[0-9]{8}[A-Z]$/;
+            if (!dniPattern.test(dni)) {
+                $(this).find("#dni-errorG").show();
+                $('#dniG').addClass('is-invalid');
+                error = 1;
+            }else{
+                $(this).find("#dni-errorG").hide();
+            }
+
+            if (error == 0) {
+                $.ajax({
+                    url: '/Proyecto/userController',
+                    type: 'POST',
+                    data: {
+                        nombre : nombre,
+                        apellidos : apellidos,
+                        correo : correo,
+                        nombre : nombre,
+                        password : contraseña,
+                        dni : dni,
+                        sexo : sexo,
+                        nacimiento : fnac,
+                        admin : admin,
+                        insertar : 1
+                    },
+                    success: function(response) {
+                        if(response){
+                            alert("Te has registrado");
+                            window.location.href = "/Proyecto/";
+                        }else{
+                            $("#error-message1").html(response);
+                            $("#error-message1").show();
+                        }
+                    },
+                    error: function() {
+                        $("#error-message1").html('Ocurrió un error al procesar la solicitud.');
+                        $("#error-message1").show();
+                    }
+                });
+            }else{
+                $("#error-message1").html(error);
+                $("#error-message1").show();
+            }
         });
     </script>
 </body>

@@ -51,7 +51,7 @@
   --segundo-dark: #7C4F2F;   
   --segundo-light: #daa880;  
   --segundo-accent: #e7991b;; 
-  --color-letra: #FFB335;
+  --color-letra: #ffffff;
 }
 
 *,
@@ -77,7 +77,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--segundo-primary);
+  color: var(--color-letra);
   text-align: left;
   background-color: #fff;
 }

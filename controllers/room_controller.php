@@ -1,5 +1,5 @@
 <?php
-    require_once('models/db_model.php');
+    require_once('database/db.php');
     require_once('models/room_model.php');
     require_once('models/suite_model.php');
     require_once('models/vip_model.php');
@@ -32,9 +32,11 @@
         }else{
             $id = createRoom($_POST['nombre'], $_POST['tipo'], $_POST['npersonas'], $_POST['precio'], $_POST['m2'], $_POST['hotel'], $img_name, $_POST['vip']);
             if($_POST['tipo'] == "suite"){
-                Suite::createSuite($id);
+                echo Suite::createSuite($id);
             }elseif ($_POST['tipo'] == "vip") {
-                vip::createVIP($id,$_POST['vip']);
+                echo vip::createVIP($id,$_POST['vip']);
+            }else{
+                echo true;
             }
             file_put_contents($file_path, $img_data);
         }

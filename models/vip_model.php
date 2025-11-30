@@ -6,8 +6,13 @@ class vip extends Habitacion {
     }
 
     public static function createVIP($id,$cod){
-        $stmt = DataBase::connect()->prepare("INSERT INTO VIP (IdHabitacion, Codigo) VALUES (?, ?)");
-        $stmt->execute([$id, $cod]);
+        try {
+            $stmt = DataBase::connect()->prepare("INSERT INTO VIP (IdHabitacion, Codigo) VALUES (?, ?)");
+            $stmt->execute([$id, $cod]);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     public static function checkVIP($habitacion, $vip){

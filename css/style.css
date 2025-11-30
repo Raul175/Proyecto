@@ -592,7 +592,7 @@ table#miTabla tr, table#miTabla td, table#miTabla th{
     --segundo-dark: #7C4F2F;   /*Barra nav y palabras*/
     --segundo-light: #daa880;  /*Fondo*/
     --segundo-accent: #e7991b; /*Hover palabras*/
-    --color-letra: #FFB335; /*Palabras nav y pie, y botones(todo menos el fondo)*/
+    --color-letra: #ffffff; /*Palabras nav y pie, y botones(todo menos el fondo)*/
 }
 
 /* ===================== */

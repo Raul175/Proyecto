@@ -1,5 +1,5 @@
 <?php
-    require_once('models/db_model.php');
+    require_once('database/db.php');
     require_once('models/cama_model.php');
 
     if(isset($_POST['insertar'])){
@@ -83,6 +83,7 @@
     }
 
     function selectAllAplicaGerente(){
+        require_once('controllers/room_controller.php');
         $habitaciones = selectAllRoomsGerente($_SESSION['id']);
         if(empty($habitaciones)){
             $habitaciones =  [];

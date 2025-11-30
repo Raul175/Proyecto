@@ -21,11 +21,11 @@ class cliente extends users {
 
     public static function updateClient($id, $domicilio, $fNacimiento){
         try {
-                $stmt = DataBase::connect()->prepare("UPDATE Cliente SET FNacimiento = ?, Domicilio = ? WHERE idUsuario LIKE ?");
-                $stmt->execute([$fNacimiento, $domicilio, $id]);
-                return true;
+            $stmt = DataBase::connect()->prepare("UPDATE Cliente SET FNacimiento = ?, Domicilio = ? WHERE idUsuario LIKE ?");
+            $stmt->execute([$fNacimiento, $domicilio, $id]);
+            return true;
         } catch (PDOException $e) {
-                return "Error al actualizar el usuario: " . $e->getMessage();
+            return "Error al actualizar el usuario: " . $e->getMessage();
         }
     }
 

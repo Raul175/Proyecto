@@ -27,14 +27,14 @@
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/Proyecto/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/Proyecto/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/Proyecto/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -268,7 +268,7 @@
                     </div>
                     <div class="form-group">
                         <label for="ubicacion">Ubicación</label>
-                        <input type="text" class="form-control" value="<?= $hotel['Ubicacion'] ?>" name="ubicacion1" id="ubicacion1">
+                        <input type="text" class="form-control" name="ubicacion1" id="ubicacion1">
                         <div class="invalid-feedback" style="display: none;" id="ubicacion-error1">
                             La ubicación es inválida o demasiado larga (máx. 100 caracteres).
                         </div>
@@ -286,7 +286,7 @@
                         </div>
                     </div>
                 </div>
-                <input type="hidden" class="form-control" value="<?= $hotel['FK_IdUsuario'] ?>" name="usuario" id="usuario">
+                <input type="hidden" class="form-control" value="<?= $_SESSION['id'] ?>" name="usuario" id="usuario">
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" onclick="$('#insertForm')[0].reset(); $('[id$=\'-error1\']').hide();$('.is-invalid').removeClass('is-invalid');" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Insertar</button>

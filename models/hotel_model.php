@@ -56,8 +56,8 @@ class Hotel {
                 hab.PrecioUnitario AS hab_PrecioUnitario,
                 hab.m2 AS hab_m2,
                 hab.Imagen AS hab_Imagen
-                FROM hotel h 
-                JOIN habitacion hab ON hab.FK_IdHotel = h.IdHotel
+                FROM Hotel h 
+                JOIN Habitacion hab ON hab.FK_IdHotel = h.IdHotel
                 GROUP BY h.IdHotel, hab.IdHabitacion
                 ORDER BY h.IdHotel, hab.IdHabitacion
                 
@@ -96,11 +96,40 @@ class Hotel {
                 hab.PrecioUnitario AS hab_PrecioUnitario,
                 hab.m2 AS hab_m2,
                 hab.Imagen AS hab_Imagen
-                FROM hotel h 
-                LEFT JOIN habitacion hab ON hab.FK_IdHotel = h.IdHotel
+                FROM Hotel h 
+                LEFT JOIN Habitacion hab ON hab.FK_IdHotel = h.IdHotel
                 ORDER BY h.IdHotel, hab.IdHabitacion
             ");
             $stmt->execute();
+            $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $hotels;
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        
+    }
+
+    public static function selectAllHotelsLocalGerente($id){
+        try {
+            $stmt = DataBase::connect()->prepare("
+                SELECT 
+                h.IdHotel AS hotel_IdHotel,
+                h.Nombre AS hotel_nombre,
+                h.Ubicacion AS hotel_ubicacion,
+                h.FK_IdLocalidad AS hotel_FK_IdLocalidad,
+                hab.IdHabitacion AS hab_IdHabitacion,
+                hab.Nombre AS hab_nombre,
+                hab.Tipo AS hab_Tipo,
+                hab.PrecioUnitario AS hab_PrecioUnitario,
+                hab.m2 AS hab_m2,
+                hab.Imagen AS hab_Imagen
+                FROM Hotel h 
+                LEFT JOIN Habitacion hab ON hab.FK_IdHotel = h.IdHotel
+                JOIN Usuario u ON u.IdUsuario = h.FK_IdUsuario
+                WHERE u.IdUsuario LIKE ?
+                ORDER BY h.IdHotel, hab.IdHabitacion
+            ");
+            $stmt->execute([$id]);
             $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $hotels;
         } catch (\Throwable $th) {

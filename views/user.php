@@ -153,6 +153,9 @@
                                 <div class="form-group col-lg-3 col-md-5">
                                     <button type="submit" class="btn btn-personalizado2 w-100">Modificar Datos</button>
                                 </div>
+                                <div class="form-group col-lg-3 col-md-5">
+                                    <button id="baja" type="button" class="btn btn-personalizado2 w-100">Dar baja</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -353,6 +356,33 @@
             $("#reserva").val($(this).data('idreserva'));
             $("#incidencia").val($(this).data('incidente'));
             $('#incidenciaModal').modal('show');
+        });
+        $(document).on("click", "#baja", function(event) {
+            event.preventDefault();
+            const usuario = $('#id1').val();
+            if (confirm("¿Estás seguro de que deseas darte de baja? Esta acción no se puede deshacer.")) {
+                $.ajax({
+                    url: '/Proyecto/userController',
+                    type: 'POST',
+                    data: {
+                        id : usuario,
+                        eliminar : 1
+                    },
+                    success: function(response) {
+                        if (response == true) {
+                            window.location.href = "/Proyecto/";
+                        } else {
+                            alert(response);
+                            $("#error-message").html(response);
+                            $("#error-message").show();
+                        }
+                    },
+                    error: function() {
+                        $("#error-message").html('Ocurrió un error al procesar la solicitud.');
+                        $("#error-message").show();
+                    }
+                });
+            }
         });
             
     

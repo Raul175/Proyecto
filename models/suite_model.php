@@ -6,9 +6,13 @@ class Suite extends Habitacion{
     }
 
     public static function createSuite($id){
-        $stmt = DataBase::connect()->prepare("INSERT INTO Suite (IdHabitacion) VALUES (?)");
-        $stmt->execute([$id]);
-        return true;
+        try {
+            $stmt = DataBase::connect()->prepare("INSERT INTO Suite (IdHabitacion) VALUES (?)");
+            $stmt->execute([$id]);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     public static function comprobarSuite($id){

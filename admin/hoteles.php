@@ -271,7 +271,7 @@
                     </div>
                     <div class="form-group">
                         <label for="ubicacion">Ubicación</label>
-                        <input type="text" class="form-control" value="<?= $hotel['Ubicacion'] ?>" name="ubicacion1" id="ubicacion1">
+                        <input type="text" class="form-control" name="ubicacion1" id="ubicacion1">
                         <div class="invalid-feedback" style="display: none;" id="ubicacion-error1">
                             La ubicación es inválida o demasiado larga (máx. 100 caracteres).
                         </div>

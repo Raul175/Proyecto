@@ -4,6 +4,9 @@
     if (empty($usuarios)) {
         $usuarios = [];
     }
+
+error_reporting(E_ALL); 
+ini_set('display_errors', 1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -748,7 +751,7 @@
                         actualizar : 1
                     },
                     success: function(response) {
-                        if (response == true) {
+                        if (response == true || response == 11) {
                             window.location.href = "/Proyecto/admin/usuarios";
                         } else {
                             $("#error-message").html(response);

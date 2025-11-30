@@ -1,5 +1,5 @@
 <?php
-    require_once('models/db_model.php');
+    require_once('database/db.php');
     require_once('models/reserva_model.php');
     require_once('models/room_model.php');
     require_once('models/suite_model.php');
