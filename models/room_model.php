@@ -54,19 +54,19 @@ class Habitacion {
                 FROM Habitacion h
                 JOIN Hotel ht ON h.FK_IdHotel = ht.IdHotel 
                 JOIN Localidad l ON ht.FK_IdLocalidad = l.IdLocalidad
-                LEFT JOIN Reserva r ON r.IdHabitacion = h.IdHabitacion 
-                AND (
-                    (r.FInicio <= ? AND r.FFin >= ?)
+                LEFT JOIN Reserva r 
+                    ON r.IdHabitacion = h.IdHabitacion
+                    AND r.FFin > ? 
+                    AND r.FInicio < ?
                     AND r.Estado NOT IN ('Cancelado', 'Completado')
-                )
                 LEFT JOIN Tiene t 
-                        ON t.IdHabitacion = h.IdHabitacion
+                    ON t.IdHabitacion = h.IdHabitacion
                 WHERE h.NPersonas >= ?
-                AND l.IdLocalidad = ?
-                AND (r.IdReserva IS NULL OR r.Estado IN ('Cancelado', 'Completado'))
+                AND (? = 0 OR l.IdLocalidad = ?)
+                AND r.IdReserva IS NULL
                 GROUP BY h.IdHabitacion;"
             );
-            $stmt->execute([$entrada,$salida,$npersonas,$lugar]);
+            $stmt->execute([$entrada,$salida,$npersonas,$lugar,$lugar]);
             $habitaciones = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $habitaciones;
         }catch (PDOException $e) {
