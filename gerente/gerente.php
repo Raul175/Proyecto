@@ -204,6 +204,7 @@
                                 La ubicación es inválida o demasiado larga (máx. 100 caracteres).
                             </div>
                         </div>
+                        <input type="hidden" class="form-control" value="<?= $_SESSION['id'] ?>" name="usuario" id="usuario">
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" onclick="$('#insertHotelForm')[0].reset(); $('[id$=\'-error1\']').hide();$('.is-invalid').removeClass('is-invalid');" data-dismiss="modal">Cancelar</button>
@@ -442,6 +443,7 @@ $(document).on("submit", "#insertHotelForm", function(event) {
     const nombre =  $("#nombre").val();
     const ubicacion = $("#ubicacion").val();
     const localidad =  $("#localidad").val();
+    const usuario =  $(this).find("#usuario").val();
 
     const nombrePattern = /^[a-zA-Z0-9\s]{1,100}$/;
     if (!nombrePattern.test(nombre)) {
@@ -468,6 +470,7 @@ $(document).on("submit", "#insertHotelForm", function(event) {
                 nombre : nombre,
                 ubicacion : ubicacion,
                 localidad : localidad,
+                usuario : usuario,
                 insertar : 1
             },
             success: function(response) {

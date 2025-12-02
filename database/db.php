@@ -12,7 +12,47 @@ class DataBase{
         $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $connect;
     }
-    
+
+    public static function backup($copiaSeguridad){
+        // Comando mysqldump para exportar la base de datos y comprimirla
+        // Nota: 'mysqldump' debe estar accesible desde la ruta de comandos de PHP.
+        // Si no lo está, deberás especificar la ruta completa, por ejemplo: 'C:/xampp/mysql/bin/mysqldump'
+        $comando = "C:/xampp/mysql/bin/mysqldump --opt -h localhost -u root rolvahotels > $copiaSeguridad";
+
+        // --- Ejecutar el Comando ---
+        $resultado = 0;
+        $salida = [];
+        exec($comando, $salida, $resultado);
+
+        if ($resultado === 0) {
+            return "SUCCESS"; // Devuelve éxito y el nombre del archivo
+        } else {
+            // Devuelve el código de error para depuración
+            return "ERROR|Código: $resultado. Salida: " . print_r($salida, true); 
+        }
+    }
+
+    public static function import($db_host,$db_user,$db_pass,$sql_path_temp,$mysql_path){
+        // Comando mysqldump para exportar la base de datos y comprimirla
+        // Nota: 'mysqldump' debe estar accesible desde la ruta de comandos de PHP.
+        // Si no lo está, deberás especificar la ruta completa, por ejemplo: 'C:/xampp/mysql/bin/mysqldump'
+        $pass_param = empty($db_pass) ? '' : "-p$db_pass";
+        $comando = "$mysql_path -h $db_host -u $db_user $pass_param $pass_param rolvahotels < \"$sql_path_temp\" 2>&1";
+
+        // --- Ejecutar el Comando ---
+        $resultado = 0;
+        $salida = [];
+        exec($comando, $output, $resultado);
+
+        // Intenta eliminar el archivo .sql temporal
+        @unlink($sql_path_temp);
+
+        if ($resultado === 0) {
+            return "SUCCESS";
+        } else {
+            return "ERROR: Fallo en la importación. Mensaje: " . implode("\n", $salida);
+        }
+    }
 
     public static function createBD(){
         $connect = self::connect();

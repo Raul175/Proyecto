@@ -16,6 +16,10 @@
 
     $hoteles = selectAllHotelsLocal();
     $localidades = selectAllLocalidades();
+    $gerentes = selectAllUsersGerente();
+    if (empty($gerentes)) {
+        $gerentes = [];
+    } 
 
     $datos = [];
     if (!empty($localidades)) {
@@ -204,6 +208,19 @@
                                 La ubicación es inválida o demasiado larga (máx. 100 caracteres).
                             </div>
                         </div>
+                        <div class="form-group">
+                        <!-- Mirar más tarde -->
+                        <label for="localidad">Gerentes</label>
+                            <select class="form-control" id="gerente" name="gerente">
+                                <option value="">Seleccione una opción</option>
+                                <?php foreach ($gerentes as $gerente): ?>
+                                    <option value="<?= $gerente['IdUsuario'] ?>"><?= $gerente['Nombre'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <div class="invalid-feedback" style="display: none;" id="usuario-error1">
+                                El usuario no tiene que estar vacia.
+                            </div>
+                    </div>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" onclick="$('#insertHotelForm')[0].reset(); $('[id$=\'-error1\']').hide();$('.is-invalid').removeClass('is-invalid');" data-dismiss="modal">Cancelar</button>
@@ -443,6 +460,7 @@ $(document).on("submit", "#insertHotelForm", function(event) {
     const nombre =  $("#nombre").val();
     const ubicacion = $("#ubicacion").val();
     const localidad =  $("#localidad").val();
+    const gerente =  $(this).find("#gerente").val();
 
     const nombrePattern = /^[a-zA-Z0-9\s]{1,100}$/;
     if (!nombrePattern.test(nombre)) {
@@ -469,6 +487,7 @@ $(document).on("submit", "#insertHotelForm", function(event) {
                 nombre : nombre,
                 ubicacion : ubicacion,
                 localidad : localidad,
+                usuario : gerente,
                 insertar : 1
             },
             success: function(response) {

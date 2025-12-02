@@ -164,6 +164,7 @@
     $router->match("GET|POST", "/adminController", function(){ require_once("controllers/admin_controller.php"); });
     $router->match("GET|POST", "/gerenteController", function(){ require_once("controllers/gerente_controller.php"); });
     $router->match("GET|POST", "/dbController", function(){ require_once("controllers/db_controller.php"); });
+    $router->match("GET|POST", "/backupController", function(){ require_once("controllers/backup_controller.php"); });
     $router->match("GET|POST", "/roomController", function(){ require_once("controllers/room_controller.php"); });
     $router->match("GET|POST", "/hotelController", function(){ require_once("controllers/hotel_controller.php"); });
     $router->match("GET|POST", "/localidadController", function(){ require_once("controllers/localidad_controller.php"); });

@@ -25,11 +25,11 @@
                 <div class="row gy-5 g-4">
                     <div class="col-md-6">
                         <h6 class="section-title text-start text-primary text-uppercase mb-4">Compañia</h6>
-                        <a class="btn btn-link" href="">Sobre Nosotros</a>
-                        <a class="btn btn-link" href="">Contactanos</a>
+                        <a class="btn btn-link" href="/Proyecto/sobre">Sobre Nosotros</a>
+                        <a class="btn btn-link" href="/Proyecto/contacto">Contactanos</a>
                         <a class="btn btn-link" href="/Proyecto/politicasPrivacidad">Politicas de Privacidad</a>
                         <a class="btn btn-link" href="">Terminos y Condiciones</a>
-                        <a class="btn btn-link" href="">Soporte</a>
+                        <a class="btn btn-link" target="unset" href="https://forms.gle/c9qZzi46GLxEykmi7">Cuestionario de Satisfacción</a>
                     </div>
                 </div>
             </div>

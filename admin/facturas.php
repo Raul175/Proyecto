@@ -109,7 +109,7 @@
                                             <td><?= $reserva['FSalida'] ?></td>
                                             <td><?= $reserva['Estado'] ?></td>
                                             <th><?= $reserva['Precio'] ?? 0 ?>€</th>
-                                            <th class="text-center align-middle"><?php if ($reserva['Incidencia'] != null) echo '<i data-toggle="modal" data-target="#eliminar" data-incidencia='.$reserva['Incidencia'].' data-usuario='.$reserva['Usuario'].' data-correo='.$reserva['Correo'].'  style="cursor: pointer" data-reserva='.$reserva['Reserva'].' class="fas fa-exclamation-circle"></i>' ?></th>
+                                            <th class="text-center align-middle"><?php if ($reserva['Incidencia'] != null) echo '<i data-toggle="modal" data-target="#eliminar" data-incidencia="'.$reserva['Incidencia'].'" data-usuario='.$reserva['Usuario'].' data-correo='.$reserva['Correo'].'  style="cursor: pointer" data-reserva='.$reserva['Reserva'].' class="fas fa-exclamation-circle"></i>' ?></th>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
