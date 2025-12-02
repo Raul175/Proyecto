@@ -10,7 +10,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Hotelier - Hotel HTML Template</title>
+    <title>RolvaHotels</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -255,7 +255,7 @@
                         </button>
                     </div>
                     <form id="comentForm">
-                        <div class="modal-body">
+                        <div class="modal-body" style="background-color: #daa880 !important;">
                             <div id="error-message1" class="alert alert-danger" style="display: none;"></div>
                             <div class="form-group">
                                 <label for="tipo">Comentario:</label>
@@ -430,6 +430,10 @@
 
             $('#comentarModal').modal('show');
         });
+        jQuery('#comentarModal').on('hidden.bs.modal', function (e) {
+            $('#comentForm')[0].reset(); $('[id$=\'-error\']').hide();$('.fa-star').removeClass('fas').addClass('far'); $('#puntuacion').val('');
+            $('#estrellas').empty();
+        })
         function mostrarModalPago(monto,reserva,inicio,fin) {
             $('#pagoModal').modal('show');
             $('#pagoModal').off('shown.bs.modal').on('shown.bs.modal', function () {

@@ -35,9 +35,11 @@
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Operaciones</h6>
-                    <a class="collapse-item" href="/Proyecto/admin?createDB">Crear BD</a>
-                    <a class="collapse-item" href="/Proyecto/admin?deleteDB">Borrar BD</a>
+                    <h6 class="collapse-header">Copias de Seguridad</h6>
+                    <a class="collapse-item" onclick="backup()">Exportar</a>
+                    <a class="collapse-item" onclick="backup_import()">Importar</a>
+                    <!-- <a class="collapse-item" href="/Proyecto/admin?createDB">Crear BD</a>
+                    <a class="collapse-item" href="/Proyecto/admin?deleteDB">Borrar BD</a> -->
                 </div>
             </div>
         </li>
@@ -90,3 +92,44 @@
         </div>
 
     </ul>
+<script>
+    function backup(){
+        $.ajax({
+            url: '/Proyecto/backupController',
+            type: 'POST',
+            data: {
+                backup: 1
+            },
+            success: function(response) {
+                if (response == "SUCCESS") {
+                    alert("Copia de seguridad realizada con exito");
+                } else {
+                    console.log(response);
+                }
+            },
+            error: function() {
+                alert(1);
+            }
+        });
+    }
+    function backup_import(){
+        $.ajax({
+            url: '/Proyecto/backupController',
+            type: 'POST',
+            data: {
+                import:1
+            },
+            success: function(response) {
+                if (response == "SUCCESS") {
+                    alert("Importación realizada con exito");
+                    window.location.href = "/Proyecto/admin";
+                } else {
+                    console.log(response);
+                }
+            },
+            error: function() {
+                alert(1);
+            }
+        });
+    }
+</script>

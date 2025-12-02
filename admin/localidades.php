@@ -329,7 +329,7 @@
         $(document).ready(function() {
             $(document).on("submit", "#deleteForm", function(event) {
                 event.preventDefault();
-                id = document.getElementById("idLocalidad").value.trim();
+                id = $(this).find("#idLocalidad").val();
                 $.ajax({
                     url: '/Proyecto/localidadController',
                     type: 'POST',

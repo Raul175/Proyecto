@@ -653,6 +653,10 @@ h1.text-primary {
     color: var(--segundo-primary) !important;
 }
 
+.text-primary .estrella {
+    color: var(--color-letra) !important;
+}
+
 .bg-white {
     background-color: var(--segundo-light) !important;
 }

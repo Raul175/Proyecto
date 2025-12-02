@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hotelier - Hotel HTML Template</title>
+    <title>RolvaHotels</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -104,30 +104,42 @@
                     </div>
                     <div class="col-md-6">
                         <div class="wow fadeInUp" data-wow-delay="0.2s">
-                            <form>
+                            <form id="contactForm">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                            <input type="text" class="form-control" id="name">
                                             <label for="name">Tú Nombre</label>
+                                            <div class="invalid-feedback" style="display: none;" id="name-error">
+                                                El nombre es inválido o demasiado largo (máx. 100 caracteres).
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                            <input type="email" class="form-control" id="email">
                                             <label for="email">Tú Email</label>
+                                            <div class="invalid-feedback" style="display: none;" id="email-error">
+                                                El correo está mal introducido (ejemplo@gmail.com).
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                            <input type="text" class="form-control" id="subject">
                                             <label for="subject">Asunto</label>
+                                            <div class="invalid-feedback" style="display: none;" id="asunto-error">
+                                                Introduce el asunto.
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
+                                            <textarea class="form-control" id="message" style="height: 150px"></textarea>
                                             <label for="message">Mensaje</label>
+                                            <div class="invalid-feedback" style="display: none;" id="mensaje-error">
+                                                Introduce el mensaje.
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -225,6 +237,81 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <script>
+        $("#contactForm").submit(function(event) {
+            event.preventDefault(); // Evita que se envíe el form automáticamente
+
+            const correo = $("#email").val();
+            const nombre = $("#name").val();
+            const asunto = $("#subject").val().trim();
+            const mensaje = $("#message").val().trim();
+
+            let error = 0;
+
+            const correoPattern = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!correoPattern.test(correo)) {
+                $('#email').addClass('is-invalid');
+                $("#email-error").show();
+                error = "Algún dato está mal introducido, revisa el correo y la contraseña";
+            }else{
+                $('#email').removeClass('is-invalid');
+                $("#email-error").hide();
+            }
+
+            const nombrePattern = /^[a-zA-Z0-9\s]{1,100}$/;
+            if (!nombrePattern.test(nombre)) {
+                $(this).find("#name-error").show();
+                $('#name').addClass('is-invalid');
+                error = "El nombre no cumple con lo requerido";
+            }else{
+                $(this).find("#name-error").hide();
+            }
+
+            if(asunto == ""){
+                $(this).find("#asunto-error").show();
+                $('#subject').addClass('is-invalid');
+                error = "Introduce el asunto";
+            } else {    
+                $('#subject').removeClass('is-invalid');
+                $("#asunto-error").hide();
+            }
+
+            if(mensaje == ""){
+                $(this).find("#mensaje-error").show();
+                $('#message').addClass('is-invalid');
+                error = "Introduce el mensaje";
+            } else {    
+                $('#message').removeClass('is-invalid');
+                $("#mensaje-error").hide();
+            }
+
+            if (error == 0) {
+                $.ajax({
+                    url: '/Proyecto/userController',
+                    type: 'POST',
+                    data: {
+                        correo: correo,
+                        nombre: nombre,
+                        asunto: asunto,
+                        mensaje: mensaje,
+                        contactar : 1
+                    },
+                    success: function(response) {
+                        if (response == 1) {
+                            alert("Mensaje enviado con exito");
+                        } else {
+                            alert(response);
+                        }
+                    },
+                    error: function() {
+                        $("#error-message").html('Ocurrió un error al procesar la solicitud.');
+                        $("#error-message").show();
+                    }
+                });
+            }else{
+                $("#error-message").html(error);
+                $("#error-message").show();
+            }
+        });
         $("#loginForm").submit(function(event) {
             event.preventDefault(); // Evita que se envíe el form automáticamente
 
@@ -469,21 +556,11 @@
             }
 
             if (lugar == '0' || lugar == null) {
-                $('#lugar').addClass('is-invalid');
-                $("#lugar-error").show();
-                error = 1;
-            }else{
-                $('#lugar').removeClass('is-invalid');
-                $("#lugar-error").hide();
+                lugar = 0;
             }
 
             if (npersonas == "") {
-                $('#npersonas4').addClass('is-invalid');
-                $("#lugar-error2").show();
-                error = 1;
-            }else{
-                $('#npersonas4').removeClass('is-invalid');
-                $("#lugar-error2").hide();
+                npersonas = 1;
             }
 
             if(error == 1){

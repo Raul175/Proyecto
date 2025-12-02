@@ -1,0 +1,555 @@
+-- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Win64 (AMD64)
+--
+-- Host: localhost    Database: rolvahotels
+-- ------------------------------------------------------
+-- Server version	10.4.32-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `administrador`
+--
+
+DROP TABLE IF EXISTS `administrador`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `administrador` (
+  `IdUsuario` int(11) NOT NULL,
+  PRIMARY KEY (`IdUsuario`),
+  CONSTRAINT `administrador_ibfk_1` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `administrador`
+--
+
+LOCK TABLES `administrador` WRITE;
+/*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
+INSERT INTO `administrador` VALUES (1),(2),(12);
+/*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `aplica`
+--
+
+DROP TABLE IF EXISTS `aplica`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `aplica` (
+  `IdCodigo` int(11) NOT NULL,
+  `IdHabitacion` int(11) NOT NULL,
+  `FInicio` date DEFAULT NULL,
+  `FFin` date DEFAULT NULL,
+  PRIMARY KEY (`IdCodigo`,`IdHabitacion`),
+  KEY `IdHabitacion` (`IdHabitacion`),
+  CONSTRAINT `aplica_ibfk_1` FOREIGN KEY (`IdCodigo`) REFERENCES `codigopromocional` (`IdCodigo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `aplica_ibfk_2` FOREIGN KEY (`IdHabitacion`) REFERENCES `habitacion` (`IdHabitacion`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `aplica`
+--
+
+LOCK TABLES `aplica` WRITE;
+/*!40000 ALTER TABLE `aplica` DISABLE KEYS */;
+INSERT INTO `aplica` VALUES (1,1,'2024-01-01','2024-12-31'),(2,2,'2024-06-01','2024-08-31'),(3,3,'2024-12-01','2024-12-31');
+/*!40000 ALTER TABLE `aplica` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cama`
+--
+
+DROP TABLE IF EXISTS `cama`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cama` (
+  `IdCama` int(11) NOT NULL AUTO_INCREMENT,
+  `Tipo` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`IdCama`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cama`
+--
+
+LOCK TABLES `cama` WRITE;
+/*!40000 ALTER TABLE `cama` DISABLE KEYS */;
+INSERT INTO `cama` VALUES (1,'Individual'),(2,'Matrimonial'),(3,'Litera'),(4,'Sofa cama');
+/*!40000 ALTER TABLE `cama` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cliente`
+--
+
+DROP TABLE IF EXISTS `cliente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cliente` (
+  `IdUsuario` int(11) NOT NULL,
+  `Domicilio` varchar(50) DEFAULT NULL,
+  `FNacimiento` date DEFAULT NULL,
+  PRIMARY KEY (`IdUsuario`),
+  CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cliente`
+--
+
+LOCK TABLES `cliente` WRITE;
+/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (4,'Calle Mayor 12','1990-05-10'),(5,'Avda. Andalucía 34','1995-08-15'),(6,'Calle Falsa 123','1985-05-12'),(7,'Av Siempre Viva 742','1990-10-01'),(8,'Paseo de la Reforma 10','1978-03-22'),(13,'Cº Jaa 12','2005-12-20');
+/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `codigopromocional`
+--
+
+DROP TABLE IF EXISTS `codigopromocional`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `codigopromocional` (
+  `IdCodigo` int(11) NOT NULL AUTO_INCREMENT,
+  `Codigo` varchar(50) DEFAULT NULL,
+  `Descuento` decimal(5,2) DEFAULT NULL,
+  PRIMARY KEY (`IdCodigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `codigopromocional`
+--
+
+LOCK TABLES `codigopromocional` WRITE;
+/*!40000 ALTER TABLE `codigopromocional` DISABLE KEYS */;
+INSERT INTO `codigopromocional` VALUES (1,'PROMO10',10.00),(2,'VERANO15',15.00),(3,'PER2025',20.00);
+/*!40000 ALTER TABLE `codigopromocional` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comentario`
+--
+
+DROP TABLE IF EXISTS `comentario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comentario` (
+  `IdComentario` int(11) NOT NULL AUTO_INCREMENT,
+  `NEstrellas` int(11) DEFAULT NULL,
+  `Fecha` date DEFAULT NULL,
+  `Comentario` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`IdComentario`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comentario`
+--
+
+LOCK TABLES `comentario` WRITE;
+/*!40000 ALTER TABLE `comentario` DISABLE KEYS */;
+INSERT INTO `comentario` VALUES (1,5,'2024-05-01','Excelente servicio y comodidad.'),(2,4,'2024-05-10','Muy buena ubicacion, volvere.'),(3,3,'2024-04-15','Buen hotel pero un poco caro.');
+/*!40000 ALTER TABLE `comentario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `complemento`
+--
+
+DROP TABLE IF EXISTS `complemento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `complemento` (
+  `IdComplemento` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`IdComplemento`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `complemento`
+--
+
+LOCK TABLES `complemento` WRITE;
+/*!40000 ALTER TABLE `complemento` DISABLE KEYS */;
+INSERT INTO `complemento` VALUES (1,'Desayuno incluido'),(2,'Vista al mar'),(3,'Late check-out'),(4,'Parking gratis');
+/*!40000 ALTER TABLE `complemento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `contempla`
+--
+
+DROP TABLE IF EXISTS `contempla`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contempla` (
+  `IdComentario` int(11) NOT NULL,
+  `IdHabitacion` int(11) NOT NULL,
+  `IdUsuario` int(11) NOT NULL,
+  PRIMARY KEY (`IdComentario`,`IdHabitacion`,`IdUsuario`),
+  KEY `IdHabitacion` (`IdHabitacion`),
+  KEY `IdUsuario` (`IdUsuario`),
+  CONSTRAINT `contempla_ibfk_1` FOREIGN KEY (`IdComentario`) REFERENCES `comentario` (`IdComentario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `contempla_ibfk_2` FOREIGN KEY (`IdHabitacion`) REFERENCES `habitacion` (`IdHabitacion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `contempla_ibfk_3` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contempla`
+--
+
+LOCK TABLES `contempla` WRITE;
+/*!40000 ALTER TABLE `contempla` DISABLE KEYS */;
+INSERT INTO `contempla` VALUES (1,1,3),(2,2,4),(3,3,6);
+/*!40000 ALTER TABLE `contempla` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `factura`
+--
+
+DROP TABLE IF EXISTS `factura`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `factura` (
+  `IdFactura` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) DEFAULT NULL,
+  `Correo` varchar(100) DEFAULT NULL,
+  `Precio` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`IdFactura`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `factura`
+--
+
+LOCK TABLES `factura` WRITE;
+/*!40000 ALTER TABLE `factura` DISABLE KEYS */;
+INSERT INTO `factura` VALUES (1,'Juan Perez','juan.perez@gmail.com',150.00),(2,'Ana Lopez','ana.lopez@gmail.com',200.00),(3,'Carlos Sanchez','carlos.sanchez@gmail.com',180.00),(4,NULL,NULL,90.00),(5,'raul','raugon9@gmail.com',90.00);
+/*!40000 ALTER TABLE `factura` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gerente`
+--
+
+DROP TABLE IF EXISTS `gerente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gerente` (
+  `IdUsuario` int(11) NOT NULL,
+  `FNacimiento` date DEFAULT NULL,
+  PRIMARY KEY (`IdUsuario`),
+  CONSTRAINT `gerente_ibfk_1` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gerente`
+--
+
+LOCK TABLES `gerente` WRITE;
+/*!40000 ALTER TABLE `gerente` DISABLE KEYS */;
+INSERT INTO `gerente` VALUES (3,'2005-12-20'),(9,'1971-03-22'),(10,'2001-12-12'),(14,'2005-12-20');
+/*!40000 ALTER TABLE `gerente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `habitacion`
+--
+
+DROP TABLE IF EXISTS `habitacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `habitacion` (
+  `IdHabitacion` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) DEFAULT NULL,
+  `Tipo` varchar(50) DEFAULT NULL,
+  `NPersonas` int(11) DEFAULT NULL,
+  `PrecioUnitario` decimal(10,2) DEFAULT NULL,
+  `m2` decimal(10,2) DEFAULT NULL,
+  `imagen` varchar(100) DEFAULT NULL,
+  `NEstrellas` int(11) DEFAULT NULL,
+  `FK_IdHotel` int(11) DEFAULT NULL,
+  `Wifi` int(11) DEFAULT NULL,
+  `Minibar` int(11) DEFAULT NULL,
+  `CajaFuerte` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IdHabitacion`),
+  KEY `FK_IdHotel` (`FK_IdHotel`),
+  CONSTRAINT `habitacion_ibfk_1` FOREIGN KEY (`FK_IdHotel`) REFERENCES `hotel` (`IdHotel`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `habitacion`
+--
+
+LOCK TABLES `habitacion` WRITE;
+/*!40000 ALTER TABLE `habitacion` DISABLE KEYS */;
+INSERT INTO `habitacion` VALUES (1,'Habitacion VIP Centro','vip',2,130.00,30.00,'406901_640.png',0,1,1,1,1),(2,'Suite Real','suite',2,160.00,40.00,'1505455_640.png',0,2,1,1,1),(3,'Habitacion Familiar','',4,90.00,35.00,'8709665_640.png',0,3,1,1,0),(4,'VIP Bahia','vip',2,140.00,32.00,'7772422_640.png',0,4,1,1,1),(5,'Suite Atardecer','suite',2,155.00,38.00,'406901_640.png',0,5,1,1,1),(6,'Habitacion Doble Est.','',2,75.00,24.00,'1677347_640.png',0,6,1,0,0),(7,'Suite Tropical','suite',2,165.00,42.00,'8732506_640.png',0,7,1,1,1),(8,'Habitacion Economica','',1,50.00,18.00,'389254_640.png',0,8,0,0,0),(9,'VIP Ejecutiva','vip',2,145.00,34.00,'4467769_640.png',0,9,1,1,1),(10,'Habitacion Patio Interior','',2,70.00,22.00,'5540926_640.png',0,10,0,0,0),(17,'c','',1,1.00,1.00,'692ac7b05eab1.png',0,12,1,1,0),(20,'gd','',3,3.00,3.00,'692dbe4792e8f.png',0,2,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `habitacion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hotel`
+--
+
+DROP TABLE IF EXISTS `hotel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hotel` (
+  `IdHotel` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) DEFAULT NULL,
+  `Ubicacion` varchar(100) DEFAULT NULL,
+  `FK_IdLocalidad` int(11) DEFAULT NULL,
+  `FK_IdUsuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IdHotel`),
+  KEY `FK_IdLocalidad` (`FK_IdLocalidad`),
+  KEY `FK_IdUsuario` (`FK_IdUsuario`),
+  CONSTRAINT `hotel_ibfk_1` FOREIGN KEY (`FK_IdLocalidad`) REFERENCES `localidad` (`IdLocalidad`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `hotel_ibfk_2` FOREIGN KEY (`FK_IdUsuario`) REFERENCES `gerente` (`IdUsuario`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hotel`
+--
+
+LOCK TABLES `hotel` WRITE;
+/*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
+INSERT INTO `hotel` VALUES (1,'Hotel Mirador','Calle Mayor 12',1,3),(2,'Gran Hotel Castilla','Avenida del Rey 45',2,3),(3,'Hotel Sol y Mar','Paseo Maritimo 5',3,9),(4,'Hotel Costa Azul','Plaza del Puerto 7',7,3),(5,'Hotel Serrano','Calle Real 90',14,9),(6,'Hotel del Norte','Av. de la Montaña 3',9,9),(7,'Hotel San Telmo','Camino del Sur 88',38,9),(8,'Hotel Central','Calle Alcala 100',28,3),(9,'Hotel Guadalquivir','Paseo del Rio 33',41,3),(10,'Hotel Monteverde','Avenida del Bosque 20',47,9),(12,'prueba','prueba',1,10);
+/*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `localidad`
+--
+
+DROP TABLE IF EXISTS `localidad`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `localidad` (
+  `IdLocalidad` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) DEFAULT NULL,
+  `CodigoPostal` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`IdLocalidad`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `localidad`
+--
+
+LOCK TABLES `localidad` WRITE;
+/*!40000 ALTER TABLE `localidad` DISABLE KEYS */;
+INSERT INTO `localidad` VALUES (1,'Álava','01000'),(2,'Albacete','02000'),(3,'Alicante','03000'),(4,'Almería','04000'),(5,'Ávila','05000'),(6,'Badajoz','06000'),(7,'Baleares','07000'),(8,'Barcelona','08000'),(9,'Burgos','09000'),(10,'Cáceres','10000'),(11,'Cádiz','11000'),(12,'Castellón','12000'),(13,'Ceuta','51000'),(14,'Ciudad Real','13000'),(15,'Córdoba','14000'),(16,'La Coruña','15000'),(17,'La Rioja','26000'),(18,'Cuenca','16000'),(19,'Gerona','17000'),(20,'Granada','18000'),(21,'Guadalajara','19000'),(22,'Gipuzkoa','20000'),(23,'Huelva','21000'),(24,'Huesca','22000'),(25,'Jaén','23000'),(26,'León','24000'),(27,'Lérida','25000'),(28,'Lugo','27000'),(29,'Madrid','28000'),(30,'Málaga','29000'),(31,'Melilla','52000'),(32,'Murcia','30000'),(33,'Navarra','31000'),(34,'Orense','32000'),(35,'Las Palmas','35000'),(36,'Asturias','33000'),(37,'Cantabria','39000'),(38,'Palencia','34000'),(39,'Pontevedra','36000'),(40,'Salamanca','37000'),(41,'Santa Cruz de Tenerife','38000'),(42,'Segovia','40000'),(43,'Sevilla','41000'),(44,'Soria','42000'),(45,'Tarragona','43000'),(46,'Teruel','44000'),(47,'Toledo','45000'),(48,'Valencia','46000'),(49,'Valladolid','47000'),(50,'Bizkaia','48000'),(51,'Zamora','49000'),(52,'Zaragoza','50000');
+/*!40000 ALTER TABLE `localidad` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `obtiene`
+--
+
+DROP TABLE IF EXISTS `obtiene`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `obtiene` (
+  `IdHabitacion` int(11) NOT NULL,
+  `IdComplemento` int(11) NOT NULL,
+  PRIMARY KEY (`IdHabitacion`,`IdComplemento`),
+  KEY `IdComplemento` (`IdComplemento`),
+  CONSTRAINT `obtiene_ibfk_1` FOREIGN KEY (`IdHabitacion`) REFERENCES `suite` (`IdHabitacion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `obtiene_ibfk_2` FOREIGN KEY (`IdComplemento`) REFERENCES `complemento` (`IdComplemento`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `obtiene`
+--
+
+LOCK TABLES `obtiene` WRITE;
+/*!40000 ALTER TABLE `obtiene` DISABLE KEYS */;
+INSERT INTO `obtiene` VALUES (2,1),(2,2),(5,3),(7,4);
+/*!40000 ALTER TABLE `obtiene` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reserva`
+--
+
+DROP TABLE IF EXISTS `reserva`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reserva` (
+  `IdReserva` int(11) NOT NULL AUTO_INCREMENT,
+  `IdUsuario` int(11) DEFAULT NULL,
+  `IdHabitacion` int(11) DEFAULT NULL,
+  `IdFactura` int(11) DEFAULT NULL,
+  `FComienzo` datetime DEFAULT NULL,
+  `FInicio` date DEFAULT NULL,
+  `FFin` date DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `correo` varchar(50) DEFAULT NULL,
+  `codigo` varchar(50) DEFAULT NULL,
+  `vip` varchar(50) DEFAULT NULL,
+  `complemento` varchar(50) DEFAULT NULL,
+  `Estado` varchar(50) DEFAULT NULL,
+  `Incidencia` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`IdReserva`),
+  KEY `IdUsuario` (`IdUsuario`),
+  KEY `IdHabitacion` (`IdHabitacion`),
+  KEY `IdFactura` (`IdFactura`),
+  CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`IdUsuario`) REFERENCES `cliente` (`IdUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `reserva_ibfk_2` FOREIGN KEY (`IdHabitacion`) REFERENCES `habitacion` (`IdHabitacion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `reserva_ibfk_3` FOREIGN KEY (`IdFactura`) REFERENCES `factura` (`IdFactura`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reserva`
+--
+
+LOCK TABLES `reserva` WRITE;
+/*!40000 ALTER TABLE `reserva` DISABLE KEYS */;
+INSERT INTO `reserva` VALUES (1,6,1,1,'2024-06-01 14:00:00','2025-12-15','2025-12-20','Juan Perez','juan.perez@gmail.com','PROMO10','no','','Pagado',''),(2,7,2,2,'2024-06-07 16:00:00','2025-07-20','2025-07-25','Ana Lopez','ana.lopez@gmail.com','VERANO15','si','desayuno','pendiente',''),(3,8,3,3,'2024-06-12 12:00:00','2025-12-15','2025-12-18','Carlos Sanchez','carlos.sanchez@gmail.com','NAVIDAD20','no','','Pagado',NULL),(5,13,3,5,'2025-11-30 11:04:00','2025-12-19','2025-12-24','raul','raugon9@gmail.com','','','','Pagado',NULL);
+/*!40000 ALTER TABLE `reserva` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `suite`
+--
+
+DROP TABLE IF EXISTS `suite`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `suite` (
+  `IdHabitacion` int(11) NOT NULL,
+  PRIMARY KEY (`IdHabitacion`),
+  CONSTRAINT `suite_ibfk_1` FOREIGN KEY (`IdHabitacion`) REFERENCES `habitacion` (`IdHabitacion`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `suite`
+--
+
+LOCK TABLES `suite` WRITE;
+/*!40000 ALTER TABLE `suite` DISABLE KEYS */;
+INSERT INTO `suite` VALUES (2),(5),(7);
+/*!40000 ALTER TABLE `suite` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tiene`
+--
+
+DROP TABLE IF EXISTS `tiene`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tiene` (
+  `IdTiene` int(11) NOT NULL AUTO_INCREMENT,
+  `IdHabitacion` int(11) DEFAULT NULL,
+  `IdCama` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IdTiene`),
+  KEY `IdHabitacion` (`IdHabitacion`),
+  KEY `IdCama` (`IdCama`),
+  CONSTRAINT `tiene_ibfk_1` FOREIGN KEY (`IdHabitacion`) REFERENCES `habitacion` (`IdHabitacion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tiene_ibfk_2` FOREIGN KEY (`IdCama`) REFERENCES `cama` (`IdCama`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tiene`
+--
+
+LOCK TABLES `tiene` WRITE;
+/*!40000 ALTER TABLE `tiene` DISABLE KEYS */;
+INSERT INTO `tiene` VALUES (1,1,2),(2,1,4),(3,2,2),(4,2,2),(5,3,1),(6,3,1),(7,3,3),(8,4,2),(9,4,4),(10,5,2),(11,5,2),(12,6,1),(13,6,1),(14,7,2),(15,7,2),(16,8,1),(17,9,2),(18,9,4),(19,10,1),(20,10,1),(26,17,1);
+/*!40000 ALTER TABLE `tiene` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuario` (
+  `IdUsuario` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) DEFAULT NULL,
+  `Apellidos` varchar(100) DEFAULT NULL,
+  `Correo` varchar(100) DEFAULT NULL,
+  `Contrasena` varchar(100) DEFAULT NULL,
+  `DNI` varchar(9) DEFAULT NULL,
+  `Sexo` varchar(50) DEFAULT NULL,
+  `Admin` enum('0','1','2') DEFAULT '0',
+  PRIMARY KEY (`IdUsuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario`
+--
+
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'admin123','admin admin','admin@rolvahotels.com','$2y$10$GDNrdEu5ilmBfuAjQX7juuNwRhi5L16QCXqKxmQ9kYuanORYcBa9O','29292929W','hombre','1'),(2,'raul','gonzalez alvarez','raul@rolvahotels.com','$2y$10$fmEjkDcssKJ2sa891ZAXyuE2krzYZm5rbe32TDJOer6.fJPOtdtO2','29292921J','hombre','1'),(3,'gerente123','gerente gerente','gerente@rolvahotels.com','$2y$10$RqH.4TCrUuxP8coxaNDxdujdNz5611frG91U.w8YPU.je//lpkaZ6','24292921Q','hombre','2'),(4,'Carlos','Gomez Perez','carlos.gomez@gmail.com','$2y$10$0Y/ksnD6Ktf6i2OBQs0sYuOLOTl2PXy8pQtrxucm0tr7AlH1TEw0q','12345678A','hombre','0'),(5,'Lucia','Martínez Ruiz','lucia.martinez@gmail.com','$2y$10$UltUi8rKOJ.W.ycirprEbOOEnWImSOsAeWk6J/Stc/L/Q0Phom/cu','87654321B','mujer','0'),(6,'Juan','Perez Garcia','juan.perez@gmail.com','$2y$10$e.8VG5iC10vvszQ2q4o8uOhizUM0wYg/YfVh3ApgUSXcQDHIzQTCC','12345678A','hombre','0'),(7,'Ana','Lopez Martin','ana.lopez@gmail.com','$2y$10$ZJ3hk9yjbMbEM8CCN3NBN.78USOt.Yq3PKXJo0M.v.WMa7zIJDOLq','87654524N','mujer','0'),(8,'Carlos','Sánchez Ruiz','carlos.sanchez@gmail.com','$2y$10$DqxPX7.EfsHaAn2J.3NMR.eaTNWOeenBOf/biprIlNtg4eAY2ABUu','11223344C','hombre','0'),(9,'pepe','pepito pepito','pepito123@gmail.com','$2y$10$6BIyZSySSXLKq/hd7RoSOO53Qsw1ppTPZZfkQnH4Zrep3l74kbE8K','11222344C','hombre','2'),(10,'ge','ge ge','ge@gmail.com','$2y$10$skSLCaDffHXHj0RWex7wDOjKy.ORL673vJm/Wp6M2Gsn9mZrJakRm','29292111D','hombre','2'),(12,'acas','a a','admin2@rolvahotels.com','$2y$10$QLIylUUbDEmQKtJIrMfwZ.JBzcmW72gN85huvfGS.W7P6JERAjFHK','29292945W','hombre','1'),(13,'rau','gonzaez alvarez','raugon9@gmail.com','$2y$10$QZpj4m1hFDZRz6ifNb4pBOi2SQSqNApDEMAxbO5mr5bs2iV19/Swm','29266929D','hombre','0'),(14,'prueba1','p p','p@gmail.com','$2y$10$LzPGvVDp.kHFh3j97sapz.XbAyyJR9pgdoDvaZ0JIJ2uB8Ws/xPU6','11122929D','hombre','2');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vip`
+--
+
+DROP TABLE IF EXISTS `vip`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vip` (
+  `IdHabitacion` int(11) NOT NULL,
+  `Codigo` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`IdHabitacion`),
+  CONSTRAINT `vip_ibfk_1` FOREIGN KEY (`IdHabitacion`) REFERENCES `habitacion` (`IdHabitacion`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vip`
+--
+
+LOCK TABLES `vip` WRITE;
+/*!40000 ALTER TABLE `vip` DISABLE KEYS */;
+INSERT INTO `vip` VALUES (1,'VIP001'),(4,'VIP002'),(9,'VIP003');
+/*!40000 ALTER TABLE `vip` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-12-01 17:11:56

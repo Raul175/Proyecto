@@ -35,6 +35,29 @@
     if(isset($_POST['eliminar'])){
         deleteUser($_POST['id']);
     }
+    
+    if(isset($_POST['contactar'])){
+        $phpmailer = new PHPMailer();
+        $phpmailer->isSMTP();
+        $phpmailer->Host = 'smtp.gmail.com';
+        $phpmailer->SMTPAuth = true;
+        $phpmailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $phpmailer->Port = 587;
+        $phpmailer->Username = 'raugon9@gmail.com';
+        $phpmailer->Password = 'wqfr eyqm equc awqf';
+        $phpmailer->setFrom($_POST['correo'], $_POST['nombre']);
+        $phpmailer->addAddress("rolvahotels@gmail.com", "rolvahotels");
+        $phpmailer->isHTML(true);
+        $phpmailer->Subject = $_POST['asunto'];
+
+        $phpmailer->Body = $_POST['mensaje'];
+
+        if(!$phpmailer->send()){
+            echo "Ahora mismo el servicio de envio de correos esta cerrado. Intentelo más tarde.";
+        }else{
+            echo 1;
+        }
+    }
 
     function login($correo,$contraseña){
         $user = users::selectUser($correo,$contraseña);

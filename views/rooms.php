@@ -12,7 +12,7 @@
     if(empty($hoteles)){
         $hoteles = [];
     }
-    if(isset($_GET['entrada']) && isset($_GET['salida']) && isset($_GET['lugar']) && !empty($_GET['lugar']) && isset($_GET['npersonas'])){
+    if(isset($_GET['entrada']) && isset($_GET['salida']) && isset($_GET['lugar']) && isset($_GET['npersonas'])){
         if(empty($_GET['entrada'])) {
             $_GET['entrada'] = date('Y-m-d');
         }
@@ -65,7 +65,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hotelier - Hotel HTML Template</title>
+    <title>RolvaHotels</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -628,8 +628,8 @@
         $("#searchForm").submit(function(event) {
             event.preventDefault(); // Evita que se envíe el form automáticamente
 
-            const lugar = $("#lugar").val();
-            const npersonas = $("#npersonas4").val();
+            let lugar = $("#lugar").val();
+            let npersonas = $("#npersonas4").val();
             const entrada = $("#entrada").val();
             const salida = $("#salida").val();
             const lugarTexto = $("#lugarTexto").val();
@@ -686,21 +686,11 @@
             }
 
             if (lugar == '0' || lugar == null) {
-                $('#lugar').addClass('is-invalid');
-                $("#lugar-error").show();
-                error = 1;
-            }else{
-                $('#lugar').removeClass('is-invalid');
-                $("#lugar-error").hide();
+                lugar = 0;
             }
 
             if (npersonas == "") {
-                $('#npersonas4').addClass('is-invalid');
-                $("#lugar-error2").show();
-                error = 1;
-            }else{
-                $('#npersonas4').removeClass('is-invalid');
-                $("#lugar-error2").hide();
+                npersonas = 1;
             }
 
             if(error == 1){

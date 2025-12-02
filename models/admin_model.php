@@ -47,6 +47,5 @@ class admin extends users {
                 return "Error al actualizar el usuario: " . $e->getMessage();
         }
     }
-
 }
 ?>

@@ -59,28 +59,54 @@
         $phpmailer->Port = 587;
         $phpmailer->Username = 'raugon9@gmail.com';
         $phpmailer->Password = 'wqfr eyqm equc awqf';
-        $phpmailer->setFrom('raugon9@gmail.com', 'Sistema de Reservas');
+        $phpmailer->setFrom('raugon9@gmail.com', 'RolvaHotels');
         $phpmailer->addAddress($correo, $usuario);
         $phpmailer->isHTML(true);
         $phpmailer->Subject = 'Aviso de Incidencia';
 
-        $phpmailer->Body = "
-            <h2>Estimado/a $usuario:</h2>
+        $phpmailer->Body = '
+            <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333333; max-width: 600px; margin: 0 auto;">
+    
+                <h2 style="color: #2c3e50; margin-bottom: 20px;">Estimado/a huésped $usuario,</h2>
 
-            <p>Le escribimos para informarle sobre el estado de la incidencia **#$incidencia** que ha reportado.</p>
+                <p style="margin-bottom: 20px;">
+                    Le contactamos con una actualización inmediata sobre el estado de la incidencia "$incidencia" reportada en su habitación.
+                </p>
 
-            <h3>✅ Acción Tomada</h3>
-            <p>Confirmamos que la incidencia ha sido asignada a nuestro equipo. **Un técnico ya se dirige a su ubicación** para iniciar la resolución del problema.</p>
+                <hr style="border: 0; border-top: 1px solid #eeeeee;">
 
-            <h3>⏱️ Próximos Pasos</h3>
-            <p>Le rogamos que esté atento/a y disponible para facilitar el acceso a nuestras instalaciones o equipo **cuando el técnico llegue**.</p>
-            <p>El técnico se comunicará con usted directamente si necesita información adicional antes de su llegada.</p>
+                <div style="background-color: #ebf5fb; padding: 15px; border-radius: 5px; margin-bottom: 25px; border-left: 5px solid #3498db;">
+                    <h3 style="color: #27ae60; margin-top: 0; font-size: 1.2em;">🛠️ Solución en Curso: Equipo de Mantenimiento Despachado</h3>
+                    <p style="margin-bottom: 0;">
+                        Confirmamos que el reporte ha sido recibido y priorizado. Un técnico de mantenimiento ya se dirige a su habitación para diagnosticar e iniciar la reparación del problema.
+                    </p>
+                </div>
 
-            <p>Agradecemos su colaboración y paciencia mientras resolvemos este inconveniente.</p>
+                <h3 style="color: #f39c12; margin-top: 25px; font-size: 1.1em;">⏱️ Próximos Pasos</h3>
+                
+                <p>Para garantizar una resolución rápida y con la mínima interrupción a su estancia:</p>
+                
+                <ul style="padding-left: 20px;">
+                    <li style="margin-bottom: 10px;">
+                        Apreciaríamos que, si es posible, facilite el acceso a la habitación al personal de mantenimiento a su llegada.
+                    </li>
+                    <li>
+                        Si fuera necesario, nuestro equipo se comunicará con usted directamente a su número de contacto o al teléfono de la habitación antes de ingresar.
+                    </li>
+                </ul>
 
-            <p>Atentamente,</p>
-            <p>RolvaHotels</p>
-        ";
+                <p style="margin-top: 30px;">
+                    Lamentamos profundamente cualquier inconveniente que esto pueda causarle durante su estancia. Nuestro objetivo es restaurar su comodidad con la mayor brevedad.
+                </p>
+
+                <p style="margin-top: 20px;">
+                    Atentamente,
+                </p>
+                <p style="font-weight: bold; margin-top: 5px; color: #34495e;">
+                    El Equipo de Atención al Huésped de RolvaHotels
+                </p>
+            </div>
+        ';
 
         if(!$phpmailer->send()){
             echo "No existe su correo electrónico o no se ha podido enviar el correo de confirmación.";

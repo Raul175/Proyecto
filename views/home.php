@@ -25,13 +25,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hotelier - Hotel HTML Template</title>
+    <title>RolvaHotels</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/favicon.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -493,16 +493,12 @@
                 error = 1;
             }
 
-            if (lugar == '0') {
-                $('#lugar').addClass('is-invalid');
-                $("#lugar-error").show();
-                error = 1;
+            if (lugar == '0' || lugar == null) {
+                lugar = 0;
             }
 
             if (npersonas == "") {
-                $('#npersonas4').addClass('is-invalid');
-                $("#lugar-error2").show();
-                error = 1;
+                npersonas = 1;
             }
 
             if(error == 1){
